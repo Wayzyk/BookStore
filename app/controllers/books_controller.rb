@@ -2,7 +2,12 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    if params[:category].blank?
+      @books = Book.all
+    else
+      @category_id = Category.find_by(name: params[:category])
+      @books = Book.where(:category_id => @category_id)
+    end
   end
 
   def show
