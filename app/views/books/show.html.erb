@@ -1,7 +1,20 @@
 <h2><%= @book.name %></h2>
 <h3><%= @book.author %></h3>
+<h4>Category: <%= @book.category.name %></h4>
 <p>
   <%= @book.description %>
+</p>
+<p>
+  <%= @book.price %>
+</p>
+<p>
+  <%= @book.year_of_publish %>
+</p>
+<p>
+  <%= @book.dimensions %>
+</p>
+<p>
+  <%= @book.materials %>
 </p>
 
 <%= link_to "Back", root_path %>
