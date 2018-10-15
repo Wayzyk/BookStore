@@ -1,10 +1,12 @@
 <%= simple_form_for @book do |b| %>
-   <%= b.input :name %>
-   <%= b.input :author %>
-   <%= b.input :price %>
-   <%= b.input :description %>
-   <%= b.input :year_of_publish%>
-   <%= b.input :dimensions %>
-   <%= b.input :materials %>
-   <%= b.submit %>
+  <%= select_tag(:category_id, options_for_select(@categories),
+                 :prompt => "Select a category") %>
+  <%= b.input :name %>
+  <%= b.input :author %>
+  <%= b.input :price %>
+  <%= b.input :description %>
+  <%= b.input :year_of_publish%>
+  <%= b.input :dimensions %>
+  <%= b.input :materials %>
+  <%= b.submit %>
 <% end %>

@@ -13,10 +13,12 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @categories = Category.all.map { |c| [c.name, c.id]  }
   end
 
   def create
     @book = Book.new(book_params)
+    @book.category_id = params[:category_id]
 
     if @book.save
       redirect_to root_path
@@ -44,7 +46,8 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:name, :author, :price, :description,
-                                 :year_of_publish, :dimensions, :materials)
+                                 :year_of_publish, :dimensions, :materials,
+                                 :category_id)
   end
 
   def find_book
