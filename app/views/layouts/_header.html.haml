@@ -1,0 +1,41 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{"data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand Bookstore
+      %a.shop-link.pull-right.visible-xs{:href => "#"}
+        %span.shop-icon
+          %span.shop-quantity 3
+    %a.shop-link.pull-right.hidden-xs{:href => "#"}
+      %span.shop-icon
+        %span.shop-quantity 3
+    #navbar.navbar-collapse.collapse.pl-30{"aria-expanded" => "false"}
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li
+            = link_to "Home", root_path
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Shop
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Mobile development
+              %li
+                %a{:href => "#"} Photo
+              %li
+                %a{:href => "#"} Web design
+          - if user_signed_in?
+            %li
+              = link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            %li
+              = link_to "Log In", new_user_session_path
+            %li
+              = link_to "Sign Up", new_user_registration_path
+        %ul.nav.navbar-nav
+          - if user_signed_in?
+            %li
+              = link_to "Add Book", new_book_path

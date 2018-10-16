@@ -1,0 +1,32 @@
+%main.container.general-main-wrap
+  .text-center
+    %h2.general-login-title Log in
+    %a.general-login-icon{href: "#"}
+      %i.fa.fa-facebook-official
+    %p.general-login-text or
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group.mb-30
+        %label.control-label.input-label{for: "email"} Enter Email
+        = f.input :email, label: false
+      .form-group.mb-30
+        %label.control-label.input-label{for: "password"} Password
+        = f.input :password, label: false
+      - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+        %a.help-block.in-gold-500{href: "/users/password/new"} Forgot password?
+      .form-group.mb-30
+        %label.control-label.input-label{for: "confirm"} Confirm Password
+        = f.input :confirm_password, label: false
+      .form-group.checkbox.text-center.mb-30
+        %label.checkbox-label
+          = f.input :remember_me, as: :hidden if devise_mapping.rememberable?
+          %span.checkbox-icon
+            %i.fa.fa-check
+          %span.checkbox-text Remember me
+      .text-center
+        %button.btn.btn-default.mb-20
+          = f.button :submit, "Back to Store"
+  %p.general-sign-text.text-center
+    Don’t have an Account?
+    %a.in-gold-500{href: "/users/sign_up"} Sign Up
+
+= render "devise/shared/links"
