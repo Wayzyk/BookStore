@@ -1,0 +1,24 @@
+%h2= @book.name
+%h3= @book.author
+%h4
+  Category: #{@book.category.name}
+%p
+  = @book.description
+%p
+  = @book.price
+%p
+  = @book.year_of_publish
+%p
+  = @book.dimensions
+%p
+  = @book.materials
+= link_to "Back", root_path
+= link_to "Edit", edit_book_path
+= link_to "Delete", book_path(@book), |
+  method: :delete,                    |
+  data: { confirm: "Are you sure?"}   |
+.row
+  .col-md-4
+    = render @book.reviews
+    %div
+      = link_to "Add Review", new_book_review_path(@book)

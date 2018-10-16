@@ -1,0 +1,12 @@
+%p
+  = review.rating
+%p
+  = review.title
+%p
+  = review.comment
+- if user_signed_in?
+  - if review.user_id == current_user.id
+    = link_to "Edit review", edit_book_review_path(review.book, review)
+    = link_to "Delete review", book_review_path(review.book, review), |
+      method: :delete,                                                |
+      data: { confirm: "Are you sure?" }                              |

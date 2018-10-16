@@ -1,0 +1,20 @@
+- @books.each do |book|
+  %h2= book.name
+  %h3= book.author
+  %h4
+    Category: #{book.category.name}
+  %p
+    = book.description
+  %p
+    = book.price
+  %p
+    = book.year_of_publish
+  %p
+    = book.dimensions
+  %p
+    = book.materials
+  = link_to "Show", book_path(book)
+  = link_to "Edit", edit_book_path(book)
+  = link_to "Delete", book_path(book), |
+    method: :delete,                   |
+    data: { confirm: "Are you sure?"}  |
