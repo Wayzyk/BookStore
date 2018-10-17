@@ -43,7 +43,7 @@
   .mb-35
     %h3 Best Sellers
     .row
-      - @best_sellers.each do |best_seller|
+      - @best_sellers.each_with_index do |best_seller, index|
         .col-sm-6.col-md-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
@@ -57,9 +57,9 @@
           .mb-35
             .clearfix
               %p.pull-right.font-16.in-gold-500
-                = best_seller.price
+                = number_to_currency(best_seller.price)
               %p.title.mr-55
                 = best_seller.name
             %span.divider-sm
             %p.lead.small
-              = best_seller.author
+              = best_seller.authors.first.full_name
