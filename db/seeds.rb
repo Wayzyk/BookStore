@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# Book.delete_all
+# Book.create! id: 1, name: "Banana", price: 0.49, category: 1
+# Book.create! id: 2, name: "Apple", price: 0.29, category: 2
+# Book.create! id: 3, name: "Carton of Strawberries", price: 1.99, category: 3
+#
+# OrderStatus.delete_all
+# OrderStatus.create! id: 1, name: "In Progress"
+# OrderStatus.create! id: 2, name: "Placed"
+# OrderStatus.create! id: 3, name: "Shipped"
+# OrderStatus.create! id: 4, name: "Cancelled"
