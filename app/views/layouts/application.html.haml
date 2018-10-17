@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 %html
   %head
+    = csrf_meta_tags
+    = csp_meta_tag
     %meta{charset: "UTF-8"}
     %meta{name: "viewport", content: "width=device-width"}
     %title= yield(:title)
@@ -9,8 +11,10 @@
     = javascript_include_tag 'application'
   %body
     =render 'layouts/header'
+
     %main.container
-      =yield :main
+      = yield
+
     = render 'layouts/footer'
 
     %script{src: "https://use.fontawesome.com/67602d7308.js"}
