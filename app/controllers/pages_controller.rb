@@ -1,3 +1,5 @@
 class PagesController < ApplicationController
-  def home; end
+  def home
+    @best_sellers = Book.first(4)
+  end
 end
