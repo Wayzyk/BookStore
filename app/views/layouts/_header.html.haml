@@ -18,8 +18,9 @@
         %ul.nav.navbar-nav
           %li
             = link_to "Home", root_path
-          %li.dropdown
-            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} Shop
+          %li.dropdown.nav.navbar-nav
+            = link_to "Shop", books_path
+            %ul
             %ul.dropdown-menu
               %li
                 %a{:href => "#"} Mobile development
@@ -35,7 +36,3 @@
               = link_to "Log In", new_user_session_path
             %li
               = link_to "Sign Up", new_user_registration_path
-        %ul.nav.navbar-nav
-          - if user_signed_in?
-            %li
-              = link_to "Add Book", new_book_path
