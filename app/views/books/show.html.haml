@@ -115,7 +115,9 @@
 
 :javascript
   $('.star-rating').raty({
-        path: '/assets/',
+        path: null,
+        starOff: "#{asset_path('star-off.png')}",
+        starOn: "#{asset_path('star-on.png')}", 
         readOnly: function() {
               return $(this).data('readonly');
               },
