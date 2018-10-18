@@ -24,7 +24,7 @@
 -#       = link_to "Add Review", new_book_review_path(@book)
 
 %main.container
-  %a.general-back-link{href: "#"}
+  %a.general-back-link{href: "/"}
     %i.fa.fa-long-arrow-left.mr-15
     Back to results
   .row
@@ -40,11 +40,14 @@
           %a.img-link{href: "#"}
             %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
     .col-sm-6
-      %h1.mt-res-0 Real-Life Responsive Web Design
-      %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+      %h1.mt-res-0
+        = @book.name
+      %p.lead.small
+        = @book.authors.first.full_name
       .row
         .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10 €32.90
+          %p.h1.in-gold-500.mt-10
+            = number_to_currency(@book.price)
         .col-xs-5.col-md-3
           .input-group.general-position
             %a.input-link{href: "#"}
@@ -57,71 +60,57 @@
       .general-info-wrap.divider-lg
         %p Description
         %p.lead.small.line-height-2
-          Smashing Book 5: Real-Life Responsive Web Design is our brand new, upcoming book with smart front-end techniques and design patterns derived from real-life responsive projects. With 13 chapters on responsive workflow, SVG, Flexbox, Web fonts, responsive images, responsive email, content strategy, debugging ...
+          = @book.description
           %a.in-gold-500.ml-10{href: "#"} Read More
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
-          %p.lead.small.pull-right 2016
+          %p.lead.small.pull-right
+            = @book.year_of_publish.strftime("%Y")
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Dimensions
-          %p.lead.small.pull-right H:6.4\" x W: 0.9\" x D: 5.0
+          %p.lead.small.pull-right
+            = @book.dimensions
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Materials
-          %p.lead.small.pull-right Hardcove, glossy paper
+          %p.lead.small.pull-right
+            = @book.materials
   .mb-80
-    %h3 Write a Review
-    %p.general-info-text Score
-    .mb-15
-      %i.fa.fa-star.rate-empty
-      %i.fa.fa-star.rate-empty
-      %i.fa.fa-star.rate-empty
-      %i.fa.fa-star.rate-empty
-      %i.fa.fa-star.rate-empty
-    %form.row
-      .col-md-8
-        .mb-40
-          .form-group
-            %label.control-label.input-label.in-grey-600{for: "title"} Title
-            %input#title.form-control{name:"title", type: "text"}
-          .form-group
-            %label.control-label.input-label.in-grey-600{for: "review"} Review
-            %textarea#review.form-control{name:"review", type: "text"}
-        .text-right
-          %button.btn.disabled.mb-20 Post
-  .mb-80
-    %h3.in-gold-500.mb-25 Reviews (3)
-    .general-message-wrap.divider-lg
-      .clearfix
-        %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified Verified Reviewer
-              .general-message-name Rita J. Lewis
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-          %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
-    .general-message-wrap.divider-lg
-      .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-        .ml-70
-          %div
-            .general-message-date.hidden-xs 11/11/16
-            .max-240
-              .general-message-verified.pull-right Verified Reviewer
-              .general-message-name May J. Novoa
-          .mb-15
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star
-            %i.fa.fa-star.rate-star.rate-empty
-          %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.
+    - if user_signed_in?
+      %h3 Write a Review
+      = simple_form_for([@book, @book.reviews.build]) do |r|
+        %p.general-info-text Score
+        .mb-15
+          = r.input :rating,
+            label: false
+        .row
+          .col-md-8
+            .mb-40
+              .form-group
+                %label.control-label.input-label.in-grey-600{for: "title"} Title
+                = r.input :title, label: false, input_html: { class: 'form-control' }
+              .form-group
+                %label.control-label.input-label.in-grey-600{for: "review"} Review
+                = r.input :comment, label: false, input_html: { class: 'form-control' }
+            .text-right#button
+              = r.button :submit
+    .mb-80
+      %h3.in-gold-500.mb-25= "Reviews (#{@reviews_count})"
+      - @book.reviews.each do |review|
+        .general-message-wrap.divider-lg
+          .clearfix
+            %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+            .ml-70
+              %div
+                .general-message-date.hidden-xs
+                  = review.created_at
+                .max-240
+                  - if user_signed_in?
+                    .general-message-verified Verified Reviewer
+                  .general-message-name User Name
+              .mb-15
+                = review.rating
+              %p
+              = review.comment
