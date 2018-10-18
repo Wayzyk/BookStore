@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dexjmoysb
+  api_key: '472691921725997'
+  api_secret: dFaAcx-zxNT0xR_IO3zHblMyavw
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dexjmoysb
+  api_key: '472691921725997'
+  api_secret: dFaAcx-zxNT0xR_IO3zHblMyavw
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dexjmoysb
+  api_key: '472691921725997'
+  api_secret: dFaAcx-zxNT0xR_IO3zHblMyavw
+  enhance_image_tag: true
+  static_image_support: false
