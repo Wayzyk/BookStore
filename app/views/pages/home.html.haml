@@ -42,11 +42,11 @@
 .mb-35
   %h3 Best Sellers
   .row
-    - @best_sellers.each_with_index do |best_seller, index|
+    - @best_sellers.each do |best_seller|
       .col-sm-6.col-md-3
         .general-thumb-wrap
           .thumbnail.general-thumbnail
-            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            = cl_image_tag best_seller.picture, class: "img-shadow general-thumbnail-img"
             .thumb-hover
               .general-thumb-link-wrap
                 = link_to book_path(best_seller), class: 'thumb-hover-link' do
