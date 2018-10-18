@@ -61,4 +61,4 @@
               = best_seller.name
           %span.divider-sm
           %p.lead.small
-            = best_seller.authors.first.full_name
+            = best_seller.authors.map(&:full_name).join(',')

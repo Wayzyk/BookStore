@@ -43,7 +43,7 @@
       %h1.mt-res-0
         = @book.name
       %p.lead.small
-        = @book.authors.first.full_name
+        = @book.authors.pluck(:first_name, "last_name").map { |names| names.join(' ')  }.join(',')
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
