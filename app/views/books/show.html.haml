@@ -80,11 +80,10 @@
   .mb-80
     - if user_signed_in?
       %h3 Write a Review
-      = simple_form_for([@book, @book.reviews.build]) do |r|
+      = simple_form_for([@book, Review.new]) do |r|
         %p.general-info-text Score
-        .mb-15
-          = r.input :rating,
-            label: false
+        .mb-15.star-rating{ data: { score: r.object.rating }}
+          = r.input :rating, :as => :hidden
         .row
           .col-md-8
             .mb-40
@@ -110,7 +109,20 @@
                   - if user_signed_in?
                     .general-message-verified Verified Reviewer
                   .general-message-name User Name
-              .mb-15
-                = review.rating
+              .mb-15.star-rating{ data: { score: review.rating, readonly: 'true' }}
               %p
               = review.comment
+
+:javascript
+  $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: function() {
+              return $(this).data('readonly');
+              },
+        click: function(rating){
+              $('#review_rating').val(rating);
+              },
+        score: function() {
+              return $(this).data('score');
+      }
+    });
