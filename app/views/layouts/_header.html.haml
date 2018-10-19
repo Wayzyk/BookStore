@@ -21,13 +21,8 @@
           %li.dropdown.nav.navbar-nav
             = link_to "Shop", category_books_path(:category_id)
             %ul
-            %ul.dropdown-menu
-              %li
-                %a{:href => "#"} Mobile development
-              %li
-                %a{:href => "#"} Photo
-              %li
-                %a{:href => "#"} Web design
+            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+              = render "layouts/categories"
           - if user_signed_in?
             %li
               = link_to "Sign Out", destroy_user_session_path, method: :delete
