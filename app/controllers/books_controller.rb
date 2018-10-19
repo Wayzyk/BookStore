@@ -1,7 +1,11 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.page(params[:page])
+    if params[:category].blank?
+      @books = Book.all
+    else
+      @books = Book.joins(:categories).where(categories: { name: params[:category] })
+    end
   end
 
   def show
