@@ -81,6 +81,6 @@
             = number_to_currency(book.price)
           %span.divider-sm
           %p.lead.small
-            = book.authors.pluck(:first_name, "last_name").map { |names| names.join(' ')  }.join(',')
-    .text-center
-      %button.btn.btn-primary View More
+            = book.authors.map(&:full_name).join(',')
+  .text-center
+    %button.btn.btn-primary View More
