@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :reviews
   has_many :book_categories
   has_many :categories, through: :book_categories
-  has_many :orders
-  mount_uploaders :pictures, PictureUploader
+  has_many :order_items
+  has_many :orders, through: :order_items
+  has_many :book_attachments
 end

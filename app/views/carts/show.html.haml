@@ -1,11 +1,68 @@
-- if @order_items.any?
-  - @order_items.each do |item|
-    %p
-      = item.book.name
-      | #{link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}}
-    %p
-      Unit Price: #{number_to_currency item.book.price} | Quantity: #{item.quantity} | Total Price: #{number_to_currency (item.book.price * item.quantity)}
-  %p
-    Your Total: #{number_to_currency current_order.total}
-- else
-  %p Your shopping cart is empty.
+%main.container.general-main-wrap
+  %h1.general-title-margin Cart
+  .hidden-xs
+    %table.table.table-hover
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600 Product
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600 Price
+        %th.col-quantity
+          %span.in-grey-600 Quantity
+        %th.col-total
+          %span.in-grey-600 SubTotal
+        %th.col-close
+      - if @order_items.any?
+        - @order_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              %td
+                %p.title
+                  = item.book.name
+              %td
+                %span.font-16.in-gold-500 #{number_to_currency item.book.price}
+              %td
+                .input-group
+                  %a.input-link{href: "#"}
+                    %i.fa.fa-minus.line-heaght-40
+                  %input.form-control.quantity-input{type: "text"}
+                  %a.input-link{href: "#"}
+                    %i.fa.fa-plus.line-heaght-40
+              %td
+                %span.font-16.in-gold-500 #{number_to_currency (item.book.price * item.quantity)}
+              %td
+                = link_to order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"}, class: "close general-cart-close" do
+                  %span{'aria-hidden': "true"} &times
+
+  .general-order-wrap
+    .row
+      .col-sm-4
+        .input-group.general-input-group
+          %label.input-label Enter Your Coupon Code
+          %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+          %div
+            %button.btn.btn-primary.mr-5.mb-15 Apply Coupon
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18 Order Summary
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            %tr
+              %td
+                %p.font-16 Subtotal:
+              %td
+                %p.font-16 #{number_to_currency current_order.total}
+            %tr
+              %td
+                %p.font-16 Coupon:
+              %td
+                %p.font-16 €0.00
+            %tr
+              %td
+                %strong.font-18 Order Total:
+              %td
+                %strong.font-18 #{number_to_currency current_order.total}
+          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
+  %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout

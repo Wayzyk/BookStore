@@ -1,7 +1,7 @@
 class PictureUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
   include Cloudinary::CarrierWave
 
   process :convert => 'png'
@@ -13,6 +13,16 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   version :thumbnail do
     resize_to_fit(50, 50)
+  end
+
+  version :small do
+    process :resize_to_fit => [150,150]
+    process :quality => 100
+  end
+
+  version :medium do
+    process :resize_to_fit => [200,200]
+    process :quality => 100
   end
 
   # Choose what kind of storage to use for this uploader:

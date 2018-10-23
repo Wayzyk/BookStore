@@ -12,5 +12,6 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @reviews_count = @book.reviews.count
+    @book_attachment = @book.book_attachments.build
   end
 end

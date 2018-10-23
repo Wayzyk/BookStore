@@ -45,6 +45,7 @@ gem "haml-rails", "~> 1.0"
 gem 'carrierwave'
 gem 'cloudinary'
 
+gem "mini_magick"
 
 
 
