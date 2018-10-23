@@ -56,7 +56,7 @@
         .col-xs-6.col-sm-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
-              = cl_image_tag book.picture, class: "img-shadow general-thumbnail-img"
+              = cl_image_tag book.pictures.first, class: "img-shadow general-thumbnail-img"
               .thumb-hover
                 .general-thumb-link-wrap
                   = link_to book_path(book), class: 'thumb-hover-link' do

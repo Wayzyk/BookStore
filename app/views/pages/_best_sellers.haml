@@ -5,7 +5,7 @@
       .col-sm-6.col-md-3
         .general-thumb-wrap
           .thumbnail.general-thumbnail
-            = cl_image_tag best_seller.picture, class: "img-shadow general-thumbnail-img"
+            = cl_image_tag best_seller.pictures.first, class: "img-shadow general-thumbnail-img"
             .thumb-hover
               .general-thumb-link-wrap
                 = link_to book_path(best_seller), class: 'thumb-hover-link' do
