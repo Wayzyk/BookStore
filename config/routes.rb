@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resources :order_items
+
+  resource :cart, only: [:show]
+
   root 'pages#home'
 end

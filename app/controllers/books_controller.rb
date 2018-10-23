@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     else
       @books = Book.joins(:categories).where(categories: { name: params[:category] })
     end
+    @order_item = current_order.order_items.new
   end
 
   def show

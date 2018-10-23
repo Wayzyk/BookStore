@@ -71,3 +71,11 @@
             %span.divider-sm
             %p.lead.small
               = book.authors.map(&:full_name).join(',')
+
+            %p
+            = book.name
+            = number_to_currency(book.price)
+            = form_for @order_item do |f|
+              = f.hidden_field :book_id, value: book.id
+              = f.number_field :quantity
+              = f.submit "Add to cart"
