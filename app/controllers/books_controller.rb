@@ -13,5 +13,6 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @reviews_count = @book.reviews.count
     @book_attachment = @book.book_attachments.build
+    @order_item = current_order.order_items.new(book: @book)
   end
 end
