@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   resource :cart, only: [:show]
 
+  resources :checkouts
+
   root 'pages#home'
 end

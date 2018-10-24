@@ -47,6 +47,8 @@ gem 'cloudinary'
 
 gem "mini_magick"
 
+gem 'wicked', '~> 1.3', '>= 1.3.3'
+
 
 
 group :development, :test do
