@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   helper_method :current_order
 
   def current_order

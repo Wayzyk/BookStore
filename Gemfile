@@ -49,6 +49,9 @@ gem "mini_magick"
 
 gem 'wicked', '~> 1.3', '>= 1.3.3'
 
+gem 'omniauth-facebook'
+
+gem "figaro"
 
 
 group :development, :test do

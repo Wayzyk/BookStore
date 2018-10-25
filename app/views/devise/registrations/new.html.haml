@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   .text-center
     %h2.general-login-title Sign Up
-    %a.general-login-icon{href: "#"}
+    = link_to omniauth_authorize_path(:user, :facebook), class: "general-login-icon" do
       %i.fa.fa-facebook-official
     %p.general-login-text or
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
