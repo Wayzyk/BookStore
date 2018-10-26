@@ -21,11 +21,12 @@
         %ul.nav.navbar-nav
           %li
             = link_to "Home", root_path
-          %li.dropdown.nav.navbar-nav
-            = link_to "Shop", category_books_path(:category_id)
-            %ul
-            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              = render "layouts/categories"
+          .dropdown
+            %li.dropdown-toggle
+              -# = link_to category.name, category_books_path(category: category.name), class: "filter-link"
+              .dropdown-content
+                - Category.all.each do |category|
+                  -# = link_to category.name, category_books_path(category: category.name)
           - if user_signed_in?
             .dropdown
               %li.dropbtn My Account
