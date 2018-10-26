@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_25_073657) do
+ActiveRecord::Schema.define(version: 2018_10_26_112340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_073657) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.decimal "price", precision: 12, scale: 2
+    t.float "price"
     t.text "description"
     t.date "year_of_publish"
     t.string "dimensions"
@@ -52,24 +52,6 @@ ActiveRecord::Schema.define(version: 2018_10_25_073657) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "order_items", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "order_id"
-    t.decimal "unit_price", precision: 12, scale: 2
-    t.integer "quantity"
-    t.decimal "total_price", precision: 12, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_order_items_on_book_id"
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-  end
-
-  create_table "order_statuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,7 +97,4 @@ ActiveRecord::Schema.define(version: 2018_10_25_073657) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "order_items", "books"
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "order_statuses"
 end
