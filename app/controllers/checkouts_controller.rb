@@ -10,7 +10,7 @@ class CheckoutsController < ApplicationController
 
   def update
     @user = current_user
-    @user.attributes = params[:user].to_h
+    # @user.attributes = params[:user]
     render_wizard @user
   end
 
