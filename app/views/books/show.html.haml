@@ -1,0 +1,99 @@
+%main.container
+  %a.general-back-link{href: "/"}
+    %i.fa.fa-long-arrow-left.mr-15
+    Back to results
+  .row
+    .col-sm-6
+      = cl_image_tag @book.book_attachments.first.picture
+      .product-gallery
+        .mb-20
+          .images.clearfix
+            - @book.book_attachments.offset(1).each do |book|
+              %a.img-link
+                = cl_image_tag book.picture.small, class: "img-responsive"
+    .col-sm-6
+      %h1.mt-res-0
+        = @book.name
+      %p.lead.small
+        = @book.authors.pluck(:first_name, "last_name").map { |names| names.join(' ')  }.join(',')
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = number_to_currency(@book.price)
+        .col-xs-5.col-md-3
+          = form_for @order_item do |f|
+            = f.hidden_field :book_id, value: @book.id
+            = f.number_field :quantity
+            .col-xs-7.col-md-5
+              = f.submit "Add to Cart", class: "btn btn-default pull-right general-position"
+      .general-info-wrap.divider-lg
+        %p Description
+        %p.lead.small.line-height-2
+          = @book.description
+          %a.in-gold-500.ml-10{href: "#"} Read More
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Year of publication
+          %p.lead.small.pull-right
+            = @book.year_of_publish.strftime("%Y")
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Dimensions
+          %p.lead.small.pull-right
+            = @book.dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Materials
+          %p.lead.small.pull-right
+            = @book.materials
+  .mb-80
+    - if user_signed_in?
+      %h3 Write a Review
+      = simple_form_for([@book, Review.new]) do |r|
+        %p.general-info-text Score
+        .mb-15.star-rating{ data: { score: r.object.rating }}
+          = r.input :rating, :as => :hidden
+        .row
+          .col-md-8
+            .mb-40
+              .form-group
+                %label.control-label.input-label.in-grey-600{for: "title"} Title
+                = r.input :title, label: false, input_html: { class: 'form-control' }
+              .form-group
+                %label.control-label.input-label.in-grey-600{for: "review"} Review
+                = r.input :comment, label: false, input_html: { class: 'form-control' }
+            .text-right#button
+              = r.button :submit
+    .mb-80
+      %h3.in-gold-500.mb-25= "Reviews (#{@reviews_count})"
+      - @book.reviews.each do |review|
+        .general-message-wrap.divider-lg
+          .clearfix
+            %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+            .ml-70
+              %div
+                .general-message-date.hidden-xs
+                  = review.created_at
+                .max-240
+                  - if user_signed_in?
+                    .general-message-verified Verified Reviewer
+                  .general-message-name User Name
+              .mb-15.star-rating{ data: { score: review.rating, readonly: 'true' }}
+              %p
+              = review.comment
+
+:javascript
+  $('.star-rating').raty({
+        path: null,
+        starOff: "#{asset_path('star-off.png')}",
+        starOn: "#{asset_path('star-on.png')}",
+        readOnly: function() {
+              return $(this).data('readonly');
+              },
+        click: function(rating){
+              $('#review_rating').val(rating);
+              },
+        score: function() {
+              return $(this).data('score');
+      }
+    });
