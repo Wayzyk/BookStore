@@ -1,0 +1,51 @@
+.mb-80
+  - if user_signed_in?
+    %h3 Write a Review
+    = simple_form_for([@book, Review.new]) do |r|
+      %p.general-info-text Score
+      .mb-15.star-rating{ data: { score: r.object.rating }}
+        = r.input :rating, :as => :hidden
+      .row
+        .col-md-8
+          .mb-40
+            .form-group
+              %label.control-label.input-label.in-grey-600{for: "title"} Title
+              = r.input :title, label: false, input_html: { class: 'form-control' }
+            .form-group
+              %label.control-label.input-label.in-grey-600{for: "review"} Review
+              = r.input :comment, label: false, input_html: { class: 'form-control' }
+          .text-right#button
+            = r.button :submit
+  .mb-80
+    %h3.in-gold-500.mb-25= "Reviews (#{@reviews_count})"
+    - @book.reviews.each do |review|
+      .general-message-wrap.divider-lg
+        .clearfix
+          %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+          .ml-70
+            %div
+              .general-message-date.hidden-xs
+                = review.created_at
+              .max-240
+                - if user_signed_in?
+                  .general-message-verified Verified Reviewer
+                .general-message-name User Name
+            .mb-15.star-rating{ data: { score: review.rating, readonly: 'true' }}
+            %p
+            = review.comment
+
+:javascript
+  $('.star-rating').raty({
+        path: null,
+        starOff: "#{asset_path('star-off.png')}",
+        starOn: "#{asset_path('star-on.png')}",
+        readOnly: function() {
+              return $(this).data('readonly');
+              },
+        click: function(rating){
+              $('#review_rating').val(rating);
+              },
+        score: function() {
+              return $(this).data('score');
+      }
+    });
