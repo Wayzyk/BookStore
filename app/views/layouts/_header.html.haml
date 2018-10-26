@@ -27,8 +27,11 @@
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               = render "layouts/categories"
           - if user_signed_in?
-            %li
-              = link_to "Sign Out", destroy_user_session_path, method: :delete
+            .dropdown
+              %li.dropbtn My Account
+              .dropdown-content
+                = link_to "Sign Out", destroy_user_session_path, method: :delete
+                = link_to "Settings", href: '#'
           - else
             %li
               = link_to "Log In", new_user_session_path

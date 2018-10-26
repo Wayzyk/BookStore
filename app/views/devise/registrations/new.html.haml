@@ -1,28 +1,27 @@
-%main.container.general-main-wrap
-  .text-center
-    %h2.general-login-title Sign Up
-    = link_to omniauth_authorize_path(:user, :facebook), class: "general-login-icon" do
-      %i.fa.fa-facebook-official
-    %p.general-login-text or
-    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = f.error_notification
-      .form-group.mb-30
-        %label.control-label.input-label{for: "email"} Enter Email
-        = f.input :email, label: false
-      .form-group.mb-30
-        %label.control-label.input-label{for: "password"} Password
-        = f.input :password, label: false
-      - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-        %a.help-block.in-gold-500{href: "/users/password/new"} Forgot password?
-      .form-group.mb-30
-        %label.control-label.input-label{for: "confirm"} Confirm Password
-        = f.input :confirm_password, label: false
-      .form-group.checkbox.text-center.mb-30
-        %label.checkbox-label
-        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-      .text-center
-        %button.btn.mb-20
-          = f.button :submit, "Sign Up"
-  %p.general-sign-text.text-center
-    Already have an Account?
-    %a.in-gold-500{href: "/users/sign_in"} Sign In
+.text-center
+  %h2.general-login-title Sign Up
+  = link_to omniauth_authorize_path(:user, :facebook), class: "general-login-icon" do
+    %i.fa.fa-facebook-official
+  %p.general-login-text or
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = f.error_notification
+    .form-group.mb-30
+      %label.control-label.input-label{for: "email"} Enter Email
+      = f.input :email, label: false
+    .form-group.mb-30
+      %label.control-label.input-label{for: "password"} Password
+      = f.input :password, label: false
+    - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+      %a.help-block.in-gold-500{href: "/users/password/new"} Forgot password?
+    .form-group.mb-30
+      %label.control-label.input-label{for: "confirm"} Confirm Password
+      = f.input :confirm_password, label: false
+    .form-group.checkbox.text-center.mb-30
+      %label.checkbox-label
+      = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    .text-center
+      %button.btn.mb-20
+        = f.button :submit, "Sign Up"
+%p.general-sign-text.text-center
+  Already have an Account?
+  %a.in-gold-500{href: "/users/sign_in"} Sign In
