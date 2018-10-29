@@ -12,11 +12,11 @@
         %a{href: "#"} Title: Z - A
   %ul.list-inline.pt-10.mb-25.mr-240
     %li.mr-3
-      = link_to "All", category_books_path(:category_id), class: "filter-link"
+      = link_to "All", catalog_path(:category_id), class: "filter-link"
     %li.mr-35
     - Category.all.each do |category|
       %li.mr-35
-        = link_to category.name, category_books_path(category: category.name), class: "filter-link"
+        = link_to category.name, catalog_path(category: category.name), class: "filter-link"
   .mb-120
     .row
       - @books.each do |book|

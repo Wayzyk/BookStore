@@ -4,11 +4,11 @@ Rails.application.routes.draw do
 
   resources :authentications, only: [:destroy]
 
-  resources :categories do
-    resources :books, only: :index
-  end
+  resources :categories
 
-  resources :books, only: :show do
+  match '/catalog', to: 'books#index', via: 'get'
+
+  resources :books, only: [:show, :index] do
     resources :reviews
   end
 
