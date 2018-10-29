@@ -4,7 +4,11 @@ FactoryBot.define do
     name { Faker::Book.title }
     price { Faker::Number.decimal(2) }
     description { Faker::Food.description }
-    year_of_publish { Faker::Stripe.year }
+    year_of_publish { Faker::Date.between(100.year.ago, Date.today) }
+    materials { Faker::Commerce.material }
+    height { Faker::Number.decimal(2) }
+    width { Faker::Number.decimal(2) }
+    length { Faker::Number.decimal(2) }
   end
 
   factory :author do
