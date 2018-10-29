@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:id]).decorate
     @reviews_count = @book.reviews.count
     @book_attachment = @book.book_attachments.build
     @order_item = current_order.order_items.new(book: @book)

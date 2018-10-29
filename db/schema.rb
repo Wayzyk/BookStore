@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_113900) do
+ActiveRecord::Schema.define(version: 2018_10_29_152353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,10 @@ ActiveRecord::Schema.define(version: 2018_10_26_113900) do
     t.float "price"
     t.text "description"
     t.date "year_of_publish"
-    t.string "dimensions"
     t.string "materials"
+    t.decimal "height"
+    t.decimal "width"
+    t.decimal "length"
   end
 
   create_table "categories", force: :cascade do |t|
