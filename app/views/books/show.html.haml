@@ -16,21 +16,29 @@
         = @book.name
       %p.lead.small
         = @book.authors.pluck(:first_name, "last_name").map { |names| names.join(' ')  }.join(',')
-      .row
-        .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10
-            = number_to_currency(@book.price)
-        .col-xs-5.col-md-3
-          = form_for @order_item do |f|
-            = f.hidden_field :book_id, value: @book.id
-            = f.number_field :quantity
-            .col-xs-7.col-md-5
-              = f.submit "Add to Cart", class: "btn btn-default pull-right general-position"
+        .row
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10
+              = number_to_currency(@book.price)
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              = simple_form_for @order_item do |f|
+                = f.hidden_field :book_id, value: @book.id
+                = f.number_field :quantity, class: 'form-control quantity-input'
+                = f.submit "Add to Cart", class: "col-xs-7 col-md-5 btn btn-default pull-right general-position"
       .general-info-wrap.divider-lg
         %p Description
         %p.lead.small.line-height-2
-          = @book.description
-          %a.in-gold-500.ml-10{href: "#"} Read More
+          - if @book.description.length > 250
+            = truncate(@book.description, length: 250)
+            = link_to '...Read more', class: "in-gold-500 ml-10 read-more-#{@book.id}"
+            :javascript
+              $('.read-more-#{@book.id}').on('click', function(e) {
+                e.preventDefault()
+                $(this).parent().html('#{escape_javascript @book.description}')
+              })
+          - else
+            = @book.description
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
