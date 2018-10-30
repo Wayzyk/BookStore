@@ -15,4 +15,8 @@ class BooksController < ApplicationController
     @book_attachment = @book.book_attachments.build
     @order_item = current_order.order_items.new(book: @book)
   end
+
+  def last_books
+    @latest_books = Book.last(3)
+  end
 end
