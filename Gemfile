@@ -52,7 +52,7 @@ gem 'wicked', '~> 1.3', '>= 1.3.3'
 gem 'omniauth-facebook'
 
 gem "figaro"
-
+gem 'factory_bot_rails'
 gem 'faker'
 
 gem 'kaminari'
@@ -63,8 +63,7 @@ gem 'country_select', '~> 3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw
 end
 
 group :development do
