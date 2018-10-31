@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'}
+  root 'pages#home'
 
   resources :authentications, only: [:destroy]
 
@@ -18,5 +19,11 @@ Rails.application.routes.draw do
 
   resources :checkouts
 
-  root 'pages#home'
+  resources :addresses
+
+  match '/settings/addresses', to: 'addresses#new', via: 'get'
+
+  resources :billing_addresses, controller: 'addresses', type: 'Billing Address'
+  resources :shipping_addresses, controller: 'addresses', type: 'Shipping Address'
+
 end
