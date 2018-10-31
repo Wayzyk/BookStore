@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :addresses
 
-  match '/settings/addresses', to: 'addresses#new', via: 'get'
+  match '/settings', to: 'addresses#new', via: 'get'
 
   resources :billing_addresses, controller: 'addresses', type: 'Billing Address'
   resources :shipping_addresses, controller: 'addresses', type: 'Shipping Address'

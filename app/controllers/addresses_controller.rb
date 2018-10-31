@@ -12,7 +12,7 @@ class AddressesController < ApplicationController
     @address = current_user.public_send(address_relation) || current_user.public_send("build_#{address_relation}")
     @address.assign_attributes(address_params)
     if @address.save
-      redirect_to settings_addresses_path
+      redirect_to settings_path
     else
       render 'new'
     end

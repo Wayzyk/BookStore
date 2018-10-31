@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+
+  def new
+    @user = User.new
+  end
+
+  def edit
+    @address = Address.new
+    @billing_address = current_user.billing_address
+    @shipping_address = current_user.shipping_address
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
