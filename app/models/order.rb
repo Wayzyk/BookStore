@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
+  belongs_to :coupon
   before_save :update_total
-  # before_create :update_status
 
   def calculate_total
     self.order_items.collect { |item| item.book.price * item.quantity }.sum
@@ -9,13 +9,11 @@ class Order < ApplicationRecord
 
   private
 
-  # def update_status
-  #   if self.status == nil?
-  #     self.status = "In progress"
-  #   end
-  # end
-
   def update_total
-    self.total = calculate_total
+    if coupon.present?
+      self.total = calculate_total - coupon.amount
+    else
+      self.total = calculate_total
+    end
   end
 end

@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   resources :billing_addresses, controller: 'addresses', type: 'Billing Address'
   resources :shipping_addresses, controller: 'addresses', type: 'Shipping Address'
 
+  get '/coupons/validate/:code', to: 'coupons#validate'
+  # resources :coupons
 end

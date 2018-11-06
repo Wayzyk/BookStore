@@ -42,9 +42,9 @@
       .col-sm-4
         .input-group.general-input-group
           %label.input-label Enter Your Coupon Code
-          %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+          %input.form-control.mb-30#coupon_code{type: "text", placeholder: "Enter Your Coupon Code "}
           %div
-            %button.btn.btn-primary.mr-5.mb-15 Apply Coupon
+            %button.btn.btn-primary.mr-5.mb-15#coupon_submit Apply Coupon
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18 Order Summary
@@ -58,15 +58,38 @@
               %td
                 %p.font-16 Coupon:
               %td
-                %p.font-16 €0.00
+                %p.font-16#coupon-amount
+                = number_to_currency(current_order.coupon&.amount)
             %tr
               %td
                 %strong.font-18 Order Total:
               %td
-                %strong.font-18 #{number_to_currency current_order.total}
+                %strong.font-18#total #{number_to_currency current_order.total}
   - if user_signed_in?
     = link_to checkout_path(:checkout_address) do
       %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
   - else
     = link_to new_user_registration_path do
       %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+
+:javascript
+  $('#coupon_submit').click(function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      let code = $('#coupon_code').val();
+      if (code) {
+        $.get("/coupons/validate/"+code, function(data){
+          if (data["valid"]) {
+            $('#coupon_code').css("border-color", "green");
+            $('#total').text(data["discounted_price"]);
+            $('#coupon-amount').text(data["coupon_amount"])
+            $('#coupon-msg').text("Coupon applied").css("color", "green");
+          } else {
+            // invalidCode();
+          }
+        })
+      } else {
+        // invalidCode();
+      }
+    });
