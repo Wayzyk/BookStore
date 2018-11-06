@@ -54,10 +54,11 @@
             %td
               %p.font-16 Item Total:
             %td
-              %p.font-16 #{number_to_currency current_order.total}
+              %p.font-16
+                = current_order.order_items.count
           %tr
             %td
               %p.font-16 Order Total:
             %td
-              %p.font-16 €117.69
+              %p.font-16 #{number_to_currency current_order.total}
         = f.submit "Save and Continue", class: "btn center-block mb-20"

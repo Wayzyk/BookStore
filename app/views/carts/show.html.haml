@@ -59,7 +59,7 @@
                 %p.font-16 Coupon:
               %td
                 %p.font-16#coupon-amount
-                = number_to_currency(current_order.coupon&.amount)
+                  = number_to_currency(current_order.coupon&.amount)
             %tr
               %td
                 %strong.font-18 Order Total:
@@ -86,10 +86,10 @@
             $('#coupon-amount').text(data["coupon_amount"])
             $('#coupon-msg').text("Coupon applied").css("color", "green");
           } else {
-            // invalidCode();
+            invalidCode();
           }
         })
       } else {
-        // invalidCode();
+        invalidCode();
       }
     });
