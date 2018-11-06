@@ -2,7 +2,7 @@ class BooksController < ApplicationController
 
   def index
     if params[:category].blank?
-      @books = Book.page(params[:page]).per(12)
+      @books = Book.page(params[:page]).per(12).order(params[:sort])
     else
       @books = Book.page(params[:page]).per(12).joins(:categories).where(categories: { name: params[:category] })
     end

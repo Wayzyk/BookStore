@@ -6,7 +6,7 @@
           %li
             = link_to "Home", root_path, class: "nav-link"
           %li
-            = link_to "Shop", catalog_path(:category_id), class: "nav-link"
+            = link_to "Shop", catalog_path, class: "nav-link"
           - if user_signed_in?
             %li
               = link_to "Orders", cart_path, class: "nav-link"

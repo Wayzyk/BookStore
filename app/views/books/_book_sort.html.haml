@@ -1,0 +1,10 @@
+.dropdowns.pull-right
+  .dropdown
+    %li.dropdown-toggle Sort by
+    .dropdown-content
+      = link_to "Newest", sort_by: :updated_at
+      %a{href: "#"} Popular first
+      = link_to "Price: low to high", sort: :price, price: :desc
+      = link_to "Price: high to low", sort: :price, price: :asc
+      = link_to "Title: A - Z", sort: :name, name: :desc
+      = link_to "Title: Z - A", sort: :name, name: :asc

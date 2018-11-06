@@ -1,18 +1,9 @@
 %h1.general-title-margin Сatalog
 .hidden-xs.clearfix
-  .dropdowns.pull-right
-    .dropdown
-      %li.dropdown-toggle Sort by
-      .dropdown-content
-        %a{href: "#"} Newest first
-        %a{href: "#"} Popular first
-        %a{href: "#"} Price: low to high
-        %a{href: "#"} Price: high to low
-        %a{href: "#"} Title: A - Z
-        %a{href: "#"} Title: Z - A
+  = render 'books/book_sort'
   %ul.list-inline.pt-10.mb-25.mr-240
     %li.mr-3
-      = link_to "All", catalog_path(:category_id), class: "filter-link"
+      = link_to "All", catalog_path, class: "filter-link"
     %li.mr-35
     - Category.all.each do |category|
       %li.mr-35
