@@ -49,22 +49,7 @@
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18 Order Summary
           %table.general-summary-table.general-summary-table-right.general-text-right
-            %tr
-              %td
-                %p.font-16 Subtotal:
-              %td
-                %p.font-16 #{number_to_currency current_order.total}
-            %tr
-              %td
-                %p.font-16 Coupon:
-              %td
-                %p.font-16#coupon-amount
-                  = number_to_currency(current_order.coupon&.amount)
-            %tr
-              %td
-                %strong.font-18 Order Total:
-              %td
-                %strong.font-18#total #{number_to_currency current_order.total}
+            = render 'order_info'
   - if user_signed_in?
     = link_to checkout_path(:checkout_address) do
       %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout

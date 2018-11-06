@@ -1,0 +1,16 @@
+%tr
+  %td
+    %p.font-16 Subtotal:
+  %td
+    %p.font-16 #{number_to_currency current_order.total}
+%tr
+  %td
+    %p.font-16 Coupon:
+  %td
+    %p.font-16#coupon-amount
+      = number_to_currency(current_order.coupon&.amount)
+%tr
+  %td
+    %strong.font-18 Order Total:
+  %td
+    %strong.font-18#total #{number_to_currency current_order.total}
