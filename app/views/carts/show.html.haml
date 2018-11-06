@@ -64,5 +64,9 @@
                 %strong.font-18 Order Total:
               %td
                 %strong.font-18 #{number_to_currency current_order.total}
-  = link_to checkout_path(:checkout_address) do
-    %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+  - if user_signed_in?
+    = link_to checkout_path(:checkout_address) do
+      %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+  - else
+    = link_to new_user_registration_path do
+      %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
