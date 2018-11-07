@@ -25,7 +25,7 @@
             %p.title
               = book.name
             %p.font-16.in-gold-500
-              = number_to_currency(book.price)
+              = number_to_currency(book.price, unit: '€')
             %span.divider-sm
             %p.lead.small
               = book.authors.map(&:full_name).join(',')
