@@ -1,4 +1,4 @@
-= form_for current_user, url: wizard_path do |f|
+= form_for current_order, url: wizard_path do |f|
   = render 'checkout_navigation_bar'
   %h3.general-subtitle Credit Card
   %table.table.table-hover
@@ -10,24 +10,36 @@
           %span.in-grey-600 Days
         %th
           %span.in-grey-600 Price
-    %tbody
-      %tr
-        %td
-          - Delivery.all.decorate.each do |delivery|
-            .form-group.radio.mt-0.mb-0
-              %label.radio-label
-                = radio_button :delivery_id, delivery.id, hidden: true, class: 'radio-input'
-                %span.radio-text
-                  = delivery[:method]
+      - Delivery.all.decorate.each do |delivery|
+        %tbody
+          %tr
             %td
-              %span
-                = delivery.date_delivery
-            %td
-              %span.font-16.in-gold-500
-                = number_to_currency(delivery[:delivery_price], unit: '€')
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label{data: {price: delivery.delivery_price},}
+                  = radio_button_tag :delivery_id, delivery.id, hidden: true, class: 'radio-input'
+                  %span.radio-text
+                    = delivery[:method]
+              %td
+                %span
+                  = delivery.date_delivery
+              %td
+                %span.font-16.in-gold-500
+                  = number_to_currency(delivery[:delivery_price], unit: '€')
   .general-text-align
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table
       = render 'carts/order_info'
   .text-center
     = f.submit "Save and Continue", class: "btn btn-default mb-20"
+
+:javascript
+  $(document).on("click", "input[type='radio']",
+    (e) => {
+      const price = e.target.parentNode.dataset.price
+      const total = document.querySelector('#total')
+      const totalSum = "#{current_order.total}"
+      console.log(totalSum)
+      const newSum = +totalSum + +price
+
+      total.innerHTML = `€${newSum}`
+  })
