@@ -14,6 +14,12 @@ class Order < ApplicationRecord
     if coupon.present?
       self.subtotal = calculate_total
       self.total = calculate_total - coupon.amount
+    elsif coupon.present? && delivery.present?
+      self.subtotal = calculate_total
+      self.total = calculate_total - coupon.amount + delivery.delivery_price
+    elsif delivery.present?
+      self.subtotal = calculate_total
+      self.total = calculate_total + delivery.delivery_price
     else
       self.subtotal = self.total = calculate_total
     end
