@@ -10,8 +10,9 @@
       %li.mr-35
         = link_to category.name, catalog_path(category: category.name), class: "filter-link"
   .mb-120
-    .row
-      - @books.each do |book|
+    - @books.each_slice(4) do |row|
+      .row
+      - for book in row        
         .col-xs-6.col-sm-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
@@ -30,7 +31,7 @@
             %span.divider-sm
             %p.lead.small
               = book.authors.map(&:full_name).join(',')
-    .text-center
-      = paginate @books
-      %p
-        = page_entries_info @books
+.text-center
+  = paginate @books
+  %p
+    = page_entries_info @books
