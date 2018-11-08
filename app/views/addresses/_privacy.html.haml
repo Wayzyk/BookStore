@@ -1,35 +1,46 @@
 #privacy.tab-pane.fade{role: "tabpanel"}
   .row.mb-60
     .col-sm-5
-      %p.in-gold-500.font-18.mb-25 Email
+      %p.in-gold-500.font-18.mb-25
+        = t('users.settings.inputs.privacy.email.title')
       %form.general-form-md
         .form-group.mb-35
-          %label.control-label.input-label{for: "email"} Enter Email
+          %label.control-label.input-label{for: "email"}
+            = t('users.settings.inputs.privacy.email.inputs.title')
           %input#email.form-control{name:"email", type: "email", placeholder: "Enter your email"}
         .general-text-align
-          %button.btn.btn-default.mb-35 Save
+          %button.btn.btn-default.mb-35
+            = t('users.settings.inputs.address.submit')
     .col-sm-5.col-sm-offset-1
-      %p.in-gold-500.font-18.mb-25 Password
+      %p.in-gold-500.font-18.mb-25
+        = t('users.settings.inputs.privacy.password.title')
       %form.general-form-md.divider-lg-bottom.pb-25
         .form-group.mb-30
-          %label.control-label.input-label{for: "oldPassword"} Old Password
+          %label.control-label.input-label{for: "oldPassword"}
+            = t('users.settings.inputs.privacy.password.title.inputs.old')
           %input#oldPassword.form-control{name:"password", type: "password", placeholder: "Old Password"}
         .form-group.mb-30
-          %label.control-label.input-label{for: "password"} New Password
+          %label.control-label.input-label{for: "password"}
+            = t('users.settings.inputs.privacy.password.title.inputs.new')
           %input#password.form-control{name:"password", type: "password", placeholder: "New Password"}
         .form-group.mb-40
-          %label.control-label.input-label{for: "confirmPassword"} Confirm Password
+          %label.control-label.input-label{for: "confirmPassword"}
+            = t('users.settings.inputs.privacy.password.title.inputs.confirm')
           %input#confirmPassword.form-control{name:"password", type: "password", placeholder: "Confirm Password"}
         .general-text-align
-          %button.btn.disabled.mb-10 Save
+          %button.btn.disabled.mb-10
+            = t('users.settings.inputs.address.submit')
     .col-sm-12
-      %p.in-gold-500.font-18.mb-25 Remove Account
+      %p.in-gold-500.font-18.mb-25
+        = t('users.settings.inputs.privacy.remove_account.title')
       %form
         .general-settings-btn
-          %button.btn.disabled.mb-20 Please Remove My Account
+          %button.btn.disabled.mb-20
+            = t('users.settings.inputs.privacy.remove_account.submit')
         .form-group.checkbox.general-settings-checkbox
           %label.checkbox-label
             %input.checkbox-input{type: "checkbox", hidden: "true"}
             %span.checkbox-icon
               %i.fa.fa-check
-            %span.checkbox-text I understand that all data will be lost
+            %span.checkbox-text
+              = t('users.settings.inputs.privacy.remove_account.checkbox')

@@ -1,33 +1,190 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  pages:
+    home:
+      buy_now: Buy now
+      welcome_to_shop: Welcome to our amazing Bookstore!
+      small_description: We pore through hundreds of new books each month and select the five best we can find to share with our members.
+      get_started: Get Started
+      best_sellers: Best Sellers
+  general:
+    name: Bookstore
+    sign_in: Sign In
+    sign_up: Sign Up
+    currency: '€'
+    sort_by: Sort by
+  titles:
+    home: Home
+    shop: Shop
+    catalog: Catalog
+    cart: Cart
+    forgot_password: Forgot password
+    change_password: Change your password
+    users:
+      my_account: My Account
+      settings: Settings
+      orders: Orders
+      order_view: Order
+    orders:
+      checkout_address: Checkout Address
+      checkout_delivery: Checkout Deliveries
+      checkout_payment: Checkout Payment
+      checkout_confirm: Checkout Confirm
+      complete: Complete
+  forms:
+    email: Enter Email
+    password: Enter Password
+    password_repeat: Repeat password
+    remember: Remember me
+  dropdowns:
+    sort:
+      newest: Newest first
+      popular: Popular first
+      price_low: "Price: Low to high"
+      price_high: "Price: High to low"
+      title_a_z: "Title: A - Z"
+      title_z_a: "Title: Z - A"
+  book:
+    show:
+      back: Back to results
+      add_to_cart: Add to Cart
+      description: Description
+      publication_year: Year of publication
+      dimensions: Dimensions
+      materials: Materials
+  review:
+    create:
+      title: Write a Review
+      inputs:
+        score: Score
+        title: Title
+        review: Review
+    all:
+      title: Reviews
+  users:
+    password:
+      forgot:
+        email: Enter your email
+        submit: Send me reset password instructions
+        cancel: Cancel
+        title: Forgot your password?
+        text: We'll email you instructions on how to reset it
+      change:
+        title: Set new password
+        inputs:
+          password: Type a new Password
+          confirm: Confirm Password
+        submit: Change
+    settings:
+      titles:
+        billing: Billing Address
+        shipping: Shipping Address
+      tabs_titles:
+        address: Address
+        privacy: Privacy
+      inputs:
+        address:
+          first_name: First Name
+          last_name: Last Name
+          address: Address
+          city: City
+          zip: Zip
+          country: Country
+          phone:
+            title: Phone
+            example: Example +355 66 123 4567
+          submit: Save
+        privacy:
+          email:
+            title: Email
+            inputs:
+              title: Enter email
+              placeholder: Enter your email
+          password:
+            title: Password
+            inputs:
+              old: Old password
+              new: New Password
+              confirm: Confirm Password
+          submit: Save
+          remove_account:
+            title: Remove Account
+            submit: Please Remove My Account
+            checkbox: I understand that all data will be lost
+    orders:
+      order_view:
+        order: Order
+        shipping: Shipping Address
+        billing: Billing Address
+  cart:
+    table:
+      titles:
+        product: Product
+        price: Price
+        quantity: Quantity
+        sub_total: SubTotal
+    bottom:
+      order_summary: Order Summary
+      sub_total: "Subtotal: "
+      coupon: "Coupon: "
+      order_total: "Order Total: "
+      apply_coupon: Apply Coupon
+      enter_coupon: Enter Your Coupon Code
+      submit: Checkout
+  orders:
+    steps:
+      first:
+        number: 1
+        title: Address
+      second:
+        number: 2
+        title: Delivery
+      third:
+        number: 3
+        title: Payment
+      fourth:
+        number: 4
+        title: Confirm
+      fifth:
+        number: 5
+        title: Complete
+    checkout_address:
+      billing: Billing Address
+      all_fields: all fields are required
+      shipping: Shipping Address
+      no_addresses: You have no addresses
+      submit: Save and Continue
+      edit_addresses: Edit addresses
+    checkout_delivery:
+      credit_cart: Credit Card
+      method: Method
+      days: Days
+      price: Price
+      submit: Save and Continue
+    checkout_payment:
+      credit_card: Credit Card
+      card_number: Card Number
+      card_name: Name on Card
+      exp_date: MM / YY
+      cvv: CVV
+      submit: Save and Continue
+    checkout_confirm:
+      shipping_address: Shipping Address
+      billing_address: Billing Address
+      shipment: Shipment
+      payment_info: Payment Information
+      table:
+        book: Book
+        price: Price
+        quantity: Quantity
+        total: Total
+      submit: Place Order
+    complete:
+      thanks: Thank You for your Order!
+      email: An order confirmation has been has been sent to
+      order: Order
+      submit: Back to Store
+    order_summary: Order Summary
+    items_total: "Items Total: "
+    order_total: "Order Total: "
+    coupon: "Coupon: "
+    subtotal: "Subtotal: "

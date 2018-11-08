@@ -1,6 +1,7 @@
 .dropdowns.pull-right
   .dropdown
-    %li.dropdown-toggle Sort by
+    %li.dropdown-toggle
+      = t('general.sort_by')
     .dropdown-content
       = link_to "Newest", sort: :updated_at
       = link_to "Popular first", "#"

@@ -1,23 +1,30 @@
 .form-group
-  %label.control-label.input-label{for: "firstName"} First Name
+  %label.control-label.input-label{for: "firstName"}
+    = t('users.settings.inputs.address.first_name')
   = f.input :first_name, label: false, input_html: { class: 'form-control', value: address&.first_name }
 .form-group
-  %label.control-label.input-label{for: "lastName"} Last Name
+  %label.control-label.input-label{for: "lastName"}
+    = t('users.settings.inputs.address.last_name')
   = f.input :last_name, label: false, input_html: { class: 'form-control', value: address&.last_name }
 .form-group
-  %label.control-label.input-label{for: "address"} Address
+  %label.control-label.input-label{for: "address"}
+    = t('users.settings.inputs.address.address')
   = f.input :address, label: false, input_html: { class: 'form-control', value: address&.address }
 .form-group
-  %label.control-label.input-label{for: "city"} City
+  %label.control-label.input-label{for: "city"}
+    = t('users.settings.inputs.address.city')
   = f.input :city, label: false, input_html: { class: 'form-control', value: address&.city }
 .form-group
-  %label.control-label.input-label{for: "zip"} Zip
+  %label.control-label.input-label{for: "zip"}
+    = t('users.settings.inputs.address.zip')
   = f.input :zip, label: false, input_html: { class: 'form-control', value: address&.zip }
 .form-group
-  %label.control-label.input-label{for: "сountry"} Country
+  %label.control-label.input-label{for: "сountry"}
+    = t('users.settings.inputs.address.country')
   = f.input :country, label: false, selected: address&.country, input_html: { class: 'form-control' }
 .form-group.mb-60
-  %label.control-label.input-label{for: "phone"} Phone
+  %label.control-label.input-label{for: "phone"}
+    = t('users.settings.inputs.address.phone.title')
   = f.input :phone, label: false, input_html: { class: 'form-control', value: address&.phone }
 .text-center.general-text-align
   = f.button :submit, "Save"

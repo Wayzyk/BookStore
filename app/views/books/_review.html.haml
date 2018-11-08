@@ -1,23 +1,27 @@
 .mb-80
   - if user_signed_in?
-    %h3 Write a Review
+    %h3
+      = t('review.create.title')
     = simple_form_for([@book, Review.new]) do |r|
-      %p.general-info-text Score
+      %p.general-info-text
+        = t('review.create.inputs.score')
       .mb-15.star-rating{ data: { score: r.object.rating }}
         = r.input :rating, :as => :hidden
       .row
         .col-md-8
           .mb-40
             .form-group
-              %label.control-label.input-label.in-grey-600{for: "title"} Title
+              %label.control-label.input-label.in-grey-600{for: "title"}
+                = t('review.create.inputs.title')
               = r.input :title, label: false, input_html: { class: 'form-control' }
             .form-group
-              %label.control-label.input-label.in-grey-600{for: "review"} Review
+              %label.control-label.input-label.in-grey-600{for: "review"}
+                = t('review.create.inputs.review')
               = r.input :comment, label: false, input_html: { class: 'form-control' }
           .text-right#button
             = r.button :submit
   .mb-80
-    %h3.in-gold-500.mb-25= "Reviews (#{@reviews_count})"
+    %h3.in-gold-500.mb-25= "#{t('review.all.title')} (#{@reviews_count})"
     - @book.reviews.each do |review|
       .general-message-wrap.divider-lg
         .clearfix

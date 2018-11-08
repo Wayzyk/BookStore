@@ -61,7 +61,7 @@ gem 'draper', '~> 3.0', '>= 3.0.1'
 
 gem 'country_select', '~> 3.1'
 
-gem 'ransack', '~> 2.1'
+gem 'i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

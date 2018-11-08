@@ -4,14 +4,18 @@
     %table.table.table-hover
       %tr.no-hover
         %th.col-pic.pl-0
-          %span.in-grey-600 Product
+          %span.in-grey-600
+            = t('cart.table.titles.product')
         %th.col-title
         %th.col-price
-          %span.in-grey-600 Price
+          %span.in-grey-600
+            = t('cart.table.titles.price')
         %th.col-quantity
-          %span.in-grey-600 Quantity
+          %span.in-grey-600
+            = t('cart.table.titles.quantity')
         %th.col-total
-          %span.in-grey-600 SubTotal
+          %span.in-grey-600
+            = t('cart.table.titles.sub_total')
         %th.col-close
       - if @order_items.any?
         - @order_items.each do |item|
@@ -41,21 +45,26 @@
     .row
       .col-sm-4
         .input-group.general-input-group
-          %label.input-label Enter Your Coupon Code
+          %label.input-label
+            = t('cart.bottom.enter_coupon')
           %input.form-control.mb-30#coupon_code{type: "text", placeholder: "Enter Your Coupon Code "}
           %div
-            %button.btn.btn-primary.mr-5.mb-15#coupon_submit Apply Coupon
+            %button.btn.btn-primary.mr-5.mb-15#coupon_submit
+              = t('cart.bottom.apply_coupon')
       .col-sm-8
         .res-mr-200.text-center.general-text-right
-          %p.in-gold-500.font-18 Order Summary
+          %p.in-gold-500.font-18
+            = t('cart.bottom.order_summary')
           %table.general-summary-table.general-summary-table-right.general-text-right
             = render 'order_info'
   - if user_signed_in?
     = link_to checkout_path(:checkout_address) do
-      %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+      %button.btn.btn-default.mb-20.hidden-xs.center-block
+        = t('cart.bottom.submit')
   - else
     = link_to new_user_registration_path do
-      %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout
+      %button.btn.btn-default.mb-20.hidden-xs.center-block
+        = t('cart.bottom.submit')
 
 :javascript
   $('#coupon_submit').click(function (e) {

@@ -1,18 +1,21 @@
 %tr
   %td
-    %p.font-16 Subtotal:
+    %p.font-16
+      = t('cart.bottom.sub_total')
   %td
     %p.font-16
       = number_to_currency(current_order.subtotal, unit: '€')
 %tr
   %td
-    %p.font-16 Coupon:
+    %p.font-16
+      = t('cart.bottom.coupon')
   %td
     %p.font-16#coupon-amount
       = number_to_currency(current_order.coupon&.amount, unit: '€')
 %tr
   %td
-    %strong.font-18 Order Total:
+    %strong.font-18
+      = t('cart.bottom.order_total')
   %td
     %strong.font-18#total
       = number_to_currency(current_order.total, unit: '€')

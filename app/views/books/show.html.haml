@@ -27,7 +27,8 @@
                 = f.number_field :quantity, class: 'form-control quantity-input'
                 = f.submit "Add to Cart", class: "col-xs-7 col-md-5 btn btn-default pull-right general-position"
       .general-info-wrap.divider-lg
-        %p Description
+        %p
+          = t('book.show.description')
         %p.lead.small.line-height-2
           - if @book.description.length > 250
             = truncate(@book.description, length: 250)
@@ -41,17 +42,20 @@
             = @book.description
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Year of publication
+          %p.pull-left
+            = t('book.show.publication_year')
           %p.lead.small.pull-right
             = @book.year_of_publish.strftime("%Y")
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Dimensions
+          %p.pull-left
+            = t('book.show.dimensions')
           %p.lead.small.pull-right
             = @book.dimensions
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Materials
+          %p.pull-left
+            = t('book.show.materials')
           %p.lead.small.pull-right
             = @book.materials
   = render 'books/review'

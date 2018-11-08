@@ -6,7 +6,8 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
+      %a.navbar-brand
+        = t('general.name')
       %a.shop-link.pull-right.visible-xs{:href => "#"}
         %span.shop-icon
           %span.shop-quantity
@@ -20,9 +21,9 @@
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            = link_to "Home", root_path
+            = link_to "#{t('titles.home')}", root_path
           %li.dropdown.nav.navbar-nav
-            = link_to "Shop", catalog_path
+            = link_to "#{t('titles.shop')}", catalog_path
             %ul
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               = render "layouts/categories"
