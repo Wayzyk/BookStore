@@ -22,7 +22,7 @@
           %tr
             %td
               .general-img-wrap-table
-                %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                = cl_image_tag item.book.book_attachments.first.picture, alt: 'design-book', class: "cart-img-shadow pull-left"
               %td
                 %p.title
                   = item.book.name
