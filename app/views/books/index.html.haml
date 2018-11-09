@@ -1,18 +1,24 @@
+
+
 %h1.general-title-margin
   = t('titles.catalog')
 .hidden-xs.clearfix
   = render 'books/book_sort'
   %ul.list-inline.pt-10.mb-25.mr-240
     %li.mr-3
-      = link_to "All", catalog_path, class: "filter-link"
+      = link_to catalog_path, class: "filter-link" do
+        All
+        %span.badge.general-badge= @categories.sum(&:books_count)
     %li.mr-35
     - Category.all.each do |category|
       %li.mr-35
-        = link_to category.name, catalog_path(category: category.name), class: "filter-link"
+        = link_to catalog_path(category: category.name), class: "filter-link" do
+          = category.name
+          %span.badge.general-badge= category.books.count
   .mb-120
     - @books.each_slice(4) do |row|
       .row
-      - for book in row        
+      - for book in row
         .col-xs-6.col-sm-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
@@ -35,3 +41,9 @@
   = paginate @books
   %p
     = page_entries_info @books
+-# %ul.list-inline.pt-10.mb-25.mr-240
+-#     %li.mr-35
+-#       = link_to catalog_path, class: 'filter-link' do
+-#         = t('button.all')
+-#         %span.badge.general-badge= @categories.sum(&:books_count)
+-#     = render @categories
