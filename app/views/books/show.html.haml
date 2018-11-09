@@ -30,7 +30,7 @@
                 %a.input-link{href: "#"}
                   %i.fa.fa-plus.line-height-40
             .col-xs-7.col-md-5
-              = f.submit "Add to Cart", class: 'btn btn-default pull-right general-position' 
+              = f.submit "Add to Cart", class: 'btn btn-default pull-right general-position'
           -# .col-xs-5.col-md-3
           -#   .input-group.general-position
           -#     = simple_form_for @order_item do |f|
@@ -68,5 +68,5 @@
           %p.pull-left
             = t('book.show.materials')
           %p.lead.small.pull-right
-            = @book.materials
+            = @book.materials          
   = render 'books/review'

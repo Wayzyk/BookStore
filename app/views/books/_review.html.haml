@@ -23,20 +23,21 @@
   .mb-80
     %h3.in-gold-500.mb-25= "#{t('review.all.title')} (#{@reviews_count})"
     - @book.reviews.each do |review|
-      .general-message-wrap.divider-lg
-        .clearfix
-          %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          .ml-70
-            %div
-              .general-message-date.hidden-xs
-                = review.created_at
-              .max-240
-                - if user_signed_in?
-                  .general-message-verified Verified Reviewer
-                .general-message-name User Name
-            .mb-15.star-rating{ data: { score: review.rating, readonly: 'true' }}
-            %p
-            = review.comment
+      - if review.approved?
+        .general-message-wrap.divider-lg
+          .clearfix
+            %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+            .ml-70
+              %div
+                .general-message-date.hidden-xs
+                  = review.created_at
+                .max-240
+                  - if user_signed_in?
+                    .general-message-verified Verified Reviewer
+                  .general-message-name User Name
+              .mb-15.star-rating{ data: { score: review.rating, readonly: 'true' }}
+              %p
+              = review.comment
 
 :javascript
   $('.star-rating').raty({

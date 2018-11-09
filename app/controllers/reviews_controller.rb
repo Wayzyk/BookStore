@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
+      flash[:success] = 'Thanks for Review. It will be published as soon as Admin will approve it.'
       redirect_to book_path(@book)
     else
       render 'new'
