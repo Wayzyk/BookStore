@@ -3,8 +3,8 @@
     %li.dropdown-toggle
       = t('general.sort_by')
     .dropdown-content
-      = link_to "Newest", sort: :updated_at
-      = link_to "Popular first", "#"
+      = link_to "Newest", sort: "created_at desc"
+      = link_to "Popular", sort: :updated_at
       = link_to "Price: low to high", sort: "price asc"
       = link_to "Price: high to low", sort: "price desc"
       = link_to "Title: A - Z", sort: "name asc"
