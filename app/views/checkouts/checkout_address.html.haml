@@ -30,3 +30,18 @@
           %span.checkbox-text Use Billing Address
       = render 'checkout_order_summary'
   = f.submit "Save and Continue", class: "btn center-block mb-20"
+
+:javascript
+  $(function() {
+
+    var checkbox = $("#trigger");
+    var hidden = $("#hidden_fields");
+    hidden.show();
+    checkbox.change(function() {
+      if (checkbox.is(':checked')) {
+        hidden.hide();
+      } else {
+        hidden.show();
+      }
+    });
+  });
