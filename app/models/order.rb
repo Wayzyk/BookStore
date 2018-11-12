@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items
-  belongs_to :delivery, optional: true
+  belongs_to :delivery
   belongs_to :coupon, optional: true
   before_save :update_total
 

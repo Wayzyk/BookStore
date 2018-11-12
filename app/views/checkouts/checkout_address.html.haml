@@ -1,6 +1,6 @@
-= simple_form_for @order, url: wizard_path do |f|
+= simple_form_for @user, url: wizard_path do |f|
   = render 'checkout_navigation_bar'
-  %form.res-mb-100
+  .res-mb-100
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -10,18 +10,14 @@
           %h3.general-subtitle Shipping Address
       .row
         .col-md-5.mb-40
-          = simple_form_for(Address.new, url: { action: "create" }) do |f|
-            = hidden_field_tag "address[type]", 'BillingAddress'
-            .visible-xs.visible-sm
-              %h3.general-subtitle.mt-0 Billing Address
-            = render 'addresses/address_form', f: f, address: current_user.billing_address
+          .visible-xs.visible-sm
+            %h3.general-subtitle.mt-0 Billing Address
+          = render 'checkout_address_form', f: f, address: current_user.billing_address
         .col-md-5.col-md-offset-1.mb-25
-          = simple_form_for(Address.new, url: { action: "create" }) do |f|
-            = hidden_field_tag "address[type]", 'ShippingAddress'
-            #hidden_fields
-              .visible-xs.visible-sm
-                %h3.general-subtitle.mt-0 ShippingAddress
-              = render 'addresses/address_form', f: f, address: current_user.shipping_address
+          #hidden_fields
+            .visible-xs.visible-sm
+              %h3.general-subtitle.mt-0 ShippingAddress
+            = render 'checkout_address_form', f: f, address: current_user.shipping_address
       .form-group.checkbox
         %label.checkbox-label
           %input.checkbox-input{type: "checkbox", id: "trigger", hidden: "true"}
