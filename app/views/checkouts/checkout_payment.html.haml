@@ -1,30 +1,26 @@
-= simple_form_for @order, url: wizard_path do |f|
+= simple_form_for @credit_card, url: wizard_path do |f|
   = render 'checkout_navigation_bar'
   %h3.general-subtitle Credit Card
   .max-600.mb-80
-    = simple_form_for(Card.new, url: 'checkouts/checkout_payment') do |f|
-      .form-group
-        %label.control-label.input-label{for: "cardNumber"} Card Number
-        = f.input :card_number, label: false, input_html: { class: 'form-control' }
-      .row
-        .col-sm-6
-          .form-group
-            %label.control-label.input-label{for: "cardName"} Name on Card
-            = f.input :card_name, label: false, input_html: { class: 'form-control' }
-        .col-sm-3
-          .form-group
-            %label.control-label.input-label{for: "firstName"} MM / YY
-            = f.input :card_date, label: false, input_html: { class: 'form-control' }
-        .col-sm-3
-          .form-group.relative
-            %label.control-label.input-label{for: "firstName"} CVV
-            = f.input :cvv, as: :string, label: false, input_html: { class: 'form-control' }
-            = f.submit "Save", input_html: { class: "btn btn-default mb-20" }
+    .form-group
+      %label.control-label.input-label{for: "cardNumber"} Card Number
+      = f.input :credit_card_number, label: false, input_html: { class: 'form-control' }
+    .row
+      .col-sm-6
+        .form-group
+          %label.control-label.input-label{for: "cardName"} Name on Card
+          = f.input :card_name, label: false, input_html: { class: 'form-control' }
+      -# .col-sm-3
+      -#   .form-group
+      -#     %label.control-label.input-label{for: "firstName"} MM / YY
+      -#     = f.input :card_date, label: false, input_html: { class: 'form-control' }
+      .col-sm-3
+        .form-group.relative
+          %label.control-label.input-label{for: "firstName"} CVV
+          = f.input :cvv, as: :string, label: false, input_html: { class: 'form-control' }
   .general-text-align
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table
       = render 'carts/order_info'
   .text-center
-    = link_to checkout_path(:checkout_confirm) do
-      %button.btn.btn-default.mb-20.hidden-xs.center-block
-        = t('cart.bottom.submit')
+    = f.submit "Save", input_html: { class: "btn btn-default mb-20 hidden-xs center-block" }

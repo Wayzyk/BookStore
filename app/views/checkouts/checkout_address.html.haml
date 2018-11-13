@@ -1,4 +1,4 @@
-= simple_form_for @user, url: wizard_path do |f|
+= simple_form_for @address, url: wizard_path, method: :put do |f|
   = render 'checkout_navigation_bar'
   .res-mb-100
     .hidden-xs.hidden-sm
@@ -25,9 +25,7 @@
             %i.fa.fa-check
           %span.checkbox-text Use Billing Address
       = render 'checkout_order_summary'
-  = link_to checkout_path(:checkout_delivery) do
-    %button.btn.btn-default.mb-20.hidden-xs.center-block
-      = t('cart.bottom.submit')
+  = f.button :submit, class: 'btn btn-default mb-20 hidden-xs center-block'
 
 :javascript
   $(function() {

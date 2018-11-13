@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_161253) do
+ActiveRecord::Schema.define(version: 2018_11_13_135057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,17 +65,6 @@ ActiveRecord::Schema.define(version: 2018_11_12_161253) do
     t.decimal "length"
   end
 
-  create_table "cards", force: :cascade do |t|
-    t.string "card_number"
-    t.integer "month"
-    t.integer "year"
-    t.integer "cvv"
-    t.string "card_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "order_id"
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -90,6 +79,17 @@ ActiveRecord::Schema.define(version: 2018_11_12_161253) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "used", default: 0, null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "credit_card_number"
+    t.integer "month"
+    t.integer "year"
+    t.integer "cvv"
+    t.string "card_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
