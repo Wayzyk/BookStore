@@ -30,7 +30,9 @@
     %table.general-summary-table
       = render 'carts/order_info'
   .text-center
-    = f.submit "Save and Continue", class: "btn btn-default mb-20"
+    = link_to checkout_path(:checkout_payment) do
+      %button.btn.btn-default.mb-20.hidden-xs.center-block
+        = t('cart.bottom.submit')
 
 :javascript
   $(document).on("click", "input[type='radio']",

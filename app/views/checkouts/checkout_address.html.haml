@@ -25,7 +25,9 @@
             %i.fa.fa-check
           %span.checkbox-text Use Billing Address
       = render 'checkout_order_summary'
-  = f.submit "Save and Continue", class: "btn center-block mb-20"
+  = link_to checkout_path(:checkout_delivery) do
+    %button.btn.btn-default.mb-20.hidden-xs.center-block
+      = t('cart.bottom.submit')
 
 :javascript
   $(function() {

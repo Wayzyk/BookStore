@@ -5,16 +5,7 @@ class CheckoutsController < ApplicationController
 
   def show
     @user = current_user
-    @order = current_order
-    case step
-    when :checkout_address
-      @billing_address
-      @shipping_address
-    when :checkout_delivery
-      current_order
-    when :checkout_payment
-      @card = current_order.cards
-    end
+
     render_wizard
   end
 

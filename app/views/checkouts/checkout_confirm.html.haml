@@ -120,4 +120,6 @@
     %table.general-summary-table.general-summary-table-right.general-text-right
       = render 'carts/order_info'
   .text-center
-    = f.submit "Place Order", class: "btn btn-default mb-20"
+    = link_to checkout_path(:checkout_complete) do
+      %button.btn.btn-default.mb-20.hidden-xs.center-block
+        = t('orders.checkout_confirm.submit')
