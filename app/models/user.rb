@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates_presence_of :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, format: {
     with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{8,}\z/
-  }, unless: :skip_password_validation
+  }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
