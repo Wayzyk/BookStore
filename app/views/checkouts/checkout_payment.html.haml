@@ -10,10 +10,14 @@
         .form-group
           %label.control-label.input-label{for: "cardName"} Name on Card
           = f.input :card_name, label: false, input_html: { class: 'form-control' }
-      -# .col-sm-3
-      -#   .form-group
-      -#     %label.control-label.input-label{for: "firstName"} MM / YY
-      -#     = f.input :card_date, label: false, input_html: { class: 'form-control' }
+      .col-sm-3
+        .form-group
+          %label.control-label.input-label{for: "firstName"} MM
+          = f.input :month, label: false, input_html: { class: 'form-control' }
+      .col-sm-3
+        .form-group
+          %label.control-label.input-label{for: "firstName"} YY
+          = f.input :year, label: false, input_html: { class: 'form-control' }
       .col-sm-3
         .form-group.relative
           %label.control-label.input-label{for: "firstName"} CVV
@@ -24,3 +28,15 @@
       = render 'carts/order_info'
   .text-center
     = f.submit "Save", input_html: { class: "btn btn-default mb-20 hidden-xs center-block" }
+
+:javascript
+  $(function(){
+    $('#credit_card_month').datepicker({
+      format: 'mm'
+    });
+  });
+  $(function(){
+    $('#credit_card_year').datepicker({
+      format: 'yy'
+    });
+  });

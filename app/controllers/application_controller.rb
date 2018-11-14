@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
     if session[:order_id]
       Order.find_by(id: session[:order_id])
     else
-      Order.new
+      order = Order.find_or_create_by(user_id: current_user.id)
+      session[:order_id] = order.id
+      order
     end
   end
 end

@@ -4,9 +4,18 @@ class CheckoutsController < ApplicationController
   steps :checkout_address, :checkout_delivery, :checkout_payment, :checkout_confirm, :checkout_complete
 
   def show
+    @user = current_user
+    @order_items = current_order.order_items
     case step
     when :checkout_address
-      @addresses = Address.new(address_params)
+      new_address = Address.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
+      current_user.billing_address ||= new_address
+      @billing_address = current_user.billing_address
+      @billing_address ||= new_address
+      new_address = Address.new(user_id: current_user.id, type: 'ShippingAddress').save(validate: false)
+      current_user.shipping_address ||= new_address
+      @shipping_address = current_user.shipping_address
+      shipping_address ||= new_address
     when :checkout_delivery
       @deliveries = Delivery.all
     when :checkout_payment
@@ -14,8 +23,12 @@ class CheckoutsController < ApplicationController
       @credit_card = CreditCard.new
     when :checkout_confirm
       return jump_to(previous_step) unless current_order.credit_card_id
-      @addresses = AddressesForm.new(address_params)
+      @billing_address = current_user.billing_address
+      @shipping_address = current_user.shipping_address
+      @credit_card = CreditCard.find(current_order.credit_card_id)
     when :checkout_complete
+      @billing_address = current_user.billing_address
+      @shipping_address = current_user.shipping_address
       return jump_to(previous_step) unless flash[:notice] = "Order accepted"
     end
     render_wizard
@@ -24,15 +37,20 @@ class CheckoutsController < ApplicationController
   def update
     case step
     when :checkout_address
-      @addresses = Address.new(address_params)
+      current_user.billing_address.update_attributes(billing_address_params)
+      current_user.shipping_address.update_attributes(shipping_address_params)
       redirect_to next_wizard_path
     when :checkout_delivery
-      current_order.update_attributes(order_params)
+      current_order.update_attributes(delivery_id: delivery_params[:delivery_id])
       redirect_to next_wizard_path
     when :checkout_payment
-      @credit_card = CreditCard.new(credit_card_params)
-      render_wizard unless @credit_card.save
-      redirect_to next_wizard_path
+      @credit_card = CreditCard.new(credit_card_params.merge(order_id: current_order.id))
+      if @credit_card.save
+        current_order.update_attributes(credit_card_id: @credit_card.id)
+        redirect_to next_wizard_path
+      else
+        render_wizard # redirect_to previous_step
+      end
     when :checkout_confirm
       flash[:notice] = "Confirm order"
       redirect_to next_wizard_path
@@ -45,70 +63,23 @@ class CheckoutsController < ApplicationController
     return { user_id: current_user.id, order_id: current_order.id }
   end
 
-  def order_params
-    params.require(:order).permit(:delivery_id)
+  def delivery_params
+    params.permit(:delivery_id)
   end
 
   def credit_card_params
     params.require(:credit_card).permit(:credit_card_number,:card_name, :month, :year, :cvv )
   end
-  # def show
-  #   case step
-  #   when :checkout_address
-  #     Address.first || Address.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
-  #     @address = Address.first
-  #     current_user.billing_address || Addres.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
-  #     @billing_address = current_user.billing_address && current_order.billing_address
-  #     current_user.shipping_address || Address.new(user_id: current_user.id, type: 'ShippingAddress').save(validate: false)
-  #     @shipping_address = current_user.shipping_address && current_order.shipping_address
-  #   when :checkout_delivery
-  #     @order = current_order.delivery
-  #   when :checkout_payment
-  #     @credit_card = CreditCard.new
-  #   when :checkout_confirm
-  #     current_order
-  #   when :checkout_complete
-  #     current_order
-  #   end
-  #   render_wizard
-  # end
-  #
-  # def update
-  #   case step
-  #   when :checkout_address
-  #     @billing_address = current_user.billing_address && current_order.billing_address
-  #     @billing_address.update_attributes(billing_address_params)
-  #     @shipping_address = current_user.shipping_address && current_order.shipping_address
-  #     @shipping_address.update_attributes(shipping_address_params)
-  #     redirect_to next_wizard_path({ order: @current_user.order })
-  #   when :checkout_delivery
-  #     @order.update_attributes(order_params)
-  #   when :checkout_payment
-  #     @credit_card.update_attributes(order_params)
-  #   when :checkout_confirm
-  #     @billing_address
-  #     @shipping_address
-  #     @order
-  #     @credit_card
-  #   when :checkout_complete
-  #     @billing_address
-  #     @shipping_address
-  #   else
-  #     redirect_to root_path
-  #   end
-  # end
-  #
-  # private
-  #
-  # def billing_address_params
-  #   params.require(:order).permit(billing_address_attributes: [:type, :first_name, :last_name, :address,
-  #                                   :city, :zip, :country, :phone])
-  # end
-  #
-  # def shipping_address_params
-  #   params.require(:order).permit(shipping_address_attributes: [:type, :first_name, :last_name, :address,
-  #                                    :city, :zip, :country, :phone])
-  # end
+
+  def billing_address_params
+    params.require(:order).require(:billing_address).permit(:type, :first_name, :last_name, :address,
+                                    :city, :zip, :country, :phone)
+  end
+
+  def shipping_address_params
+    params.require(:order).require(:shipping_address).permit(:type, :first_name, :last_name, :address,
+                                     :city, :zip, :country, :phone)
+  end
 
   def redirect_to_finish_wizard
     redirect_to catalog_path, notice: "You order was accepted."

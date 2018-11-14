@@ -1,4 +1,4 @@
-= simple_form_for current_order, url: wizard_path do |f|
+= simple_form_for current_order, url: wizard_path, method: :put do |f|
   = render 'checkout_navigation_bar'
   %h3.general-subtitle Credit Card
   %table.table.table-hover
@@ -15,7 +15,7 @@
           %tr
             %td
               .form-group.radio.mt-0.mb-0
-                %label.radio-label{data: {price: delivery.delivery_price},}
+                %label.radio-label{data: {price: delivery.delivery_price} }
                   = radio_button_tag :delivery_id, delivery.id, hidden: true, class: 'radio-input'
                   %span.radio-text
                     = delivery[:method]
@@ -30,9 +30,7 @@
     %table.general-summary-table
       = render 'carts/order_info'
   .text-center
-    = link_to checkout_path(:checkout_payment) do
-      %button.btn.btn-default.mb-20.hidden-xs.center-block
-        = t('cart.bottom.submit')
+    = f.button :submit, class: 'btn btn-default mb-20 hidden-xs center-block'
 
 :javascript
   $(document).on("click", "input[type='radio']",

@@ -3,117 +3,83 @@
   .col-sm-3
     %h3.general-subtitle Shipping Address
     %p.general-address
-      John Doe
-      %span.general-edit edit
+      = "#{@shipping_address.first_name} #{@shipping_address.last_name}"
+      = link_to '/checkouts/checkout_address' do
+        %span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = "#{@shipping_address.address}"
       %br
-      New York NY 1001
+      = @shipping_address.city
       %br
-      United States
+      = @shipping_address.country
       %br
-      Phone +16507599755
+      = @shipping_address.phone
   .col-sm-3
     %h3.general-subtitle Billing Address
     %p.general-address
-      John Doe
-      %span.general-edit edit
+      = "#{@billing_address.first_name} #{@billing_address.last_name}"
+      = link_to '/checkouts/checkout_address' do
+        %span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = "#{@billing_address.address}"
       %br
-      New York NY 1001
+      = @billing_address.city
       %br
-      United States
+      = @billing_address.country
       %br
-      Phone +16507599755
+      = @billing_address.phone
   .col-sm-3
     %h3.general-subtitle Shipments
     %p.general-address
-      Delivery Next Day!
-      %span.general-edit edit
+      = link_to '/checkouts/checkout_delivery' do
+        %span.general-edit edit
       %br
-      By train
+      = current_order.delivery.method
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
-      ** ** ** 8756
-      %span.general-edit edit
+      = "#{@credit_card.credit_card_number.slice(0..3)} **** **** #{@credit_card.credit_card_number.slice(9..12)}"
+      = link_to '/checkouts/checkout_payment' do
+        %span.general-edit edit
       %br
-      12/2018
-.visible-xs
-  .general-cart-item.divider-lg
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %P.in-grey-600.fw-300 A recipe-based book to help you efficiently create amazing PHP-based applications with Laravel 5.x
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          %span 1
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
-  .general-cart-item.divider-lg.mb-55
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          .input-group
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-heaght-40
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
+      = "#{@credit_card.month}/#{@credit_card.year}"
 .hidden-xs.divider-lg.pt-20
   %table.table.table-hover
     %thead
       %tr
         %th
-          %span.in-grey-600 Book
+          %span.in-grey-600
+            = t('orders.checkout_confirm.table.book')
         %th.col-method
         %th
-          %span.in-grey-600 Price
+          %span.in-grey-600
+            = t('cart.table.titles.price')
         %th
-          %span.in-grey-600 Quantity
+          %span.in-grey-600
+            = t('cart.table.titles.quantity')
         %th
-          %span.in-grey-600 Total
+          %span.in-grey-600
+            = t('cart.table.titles.total')
     %tbody
-      %tr
-        %td
-          .general-img-wrap-table
-            %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-        %td
-          %p.title Android Programming for Beginners
-          %p.in-grey-600.fw-300 Maximize the potential of Bootstrap with a collection of real-world site projects for better, faster, more responsive web applications
-        %td
-          %span.font-16.in-gold-500 €28.50
-        %td
-          %span.ml-30 1
-        %td
-          %span.font-16.in-gold-500 €32.90
+      - if @order_items.any?
+        - @order_items.each do |item|
+          %tr
+            %td
+              .general-img-wrap-table
+                = cl_image_tag item.book.book_attachments.first.picture, alt: 'design-book', class: "cart-img-shadow pull-left"
+            %td
+              %p.title
+                = item.book.name
+              %p.in-grey-600.fw-300
+                = item.book.description
+            %td
+              %span.font-16.in-gold-500= number_to_currency(item.book.price, unit: '€')
+            %td
+              %span.ml-30
+                = item.quantity
+            %td
+              %span.font-16.in-gold-500
+                = number_to_currency(item.book.price * item.quantity, unit: '€')
 .text-center.general-text-right
   %p.in-gold-500.font-18 Order Summary
   %table.general-summary-table.general-summary-table-right.general-text-right
