@@ -1,4 +1,4 @@
-= form_for current_order, url: wizard_path do |f|
+= form_for current_order, url: wizard_path, method: :put do |f|
   = render 'checkout_navigation_bar'
   .row.mb-20
     .col-sm-3

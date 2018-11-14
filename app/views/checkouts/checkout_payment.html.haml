@@ -1,4 +1,4 @@
-= simple_form_for @credit_card, url: wizard_path do |f|
+= simple_form_for @credit_card, url: wizard_path, method: :put do |f|
   = render 'checkout_navigation_bar'
   %h3.general-subtitle Credit Card
   .max-600.mb-80
