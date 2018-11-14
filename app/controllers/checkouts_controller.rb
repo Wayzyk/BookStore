@@ -13,7 +13,7 @@ class CheckoutsController < ApplicationController
       return jump_to(previous_step) unless current_order.delivery
       @credit_card = CreditCard.new
     when :checkout_confirm
-      return jump_to(previous_step) unless current_order.credit_card
+      return jump_to(previous_step) unless current_order.credit_card_id
       @addresses = AddressesForm.new(address_params)
     when :checkout_complete
       return jump_to(previous_step) unless flash[:notice] = "Order accepted"
