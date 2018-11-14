@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :user
+  belongs_to :order
 
   validates_presence_of :first_name, :last_name, :address, :city, :zip, :country, :phone
   validates_length_of :first_name, :last_name, :address, :city, :country, maximum: 49
@@ -8,7 +9,4 @@ class Address < ApplicationRecord
   validates :address, format: { with: /\A[-A-Za-z\s\d,]{0,49}\z/ }
   validates_length_of :phone, maximum: 15
   validates_length_of :zip, maximum: 10
-
-  accepts_nested_attributes_for :general_user_profile
-  accepts_nested_attributes_for :creator_profile
 end

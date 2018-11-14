@@ -9,9 +9,9 @@ class CheckoutsController < ApplicationController
       Address.first || Address.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
       @address = Address.first
       current_user.billing_address || Addres.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
-      @billing_address = current_user.billing_address
+      @billing_address = current_user.billing_address && current_order.billing_address
       current_user.shipping_address || Address.new(user_id: current_user.id, type: 'ShippingAddress').save(validate: false)
-      @shipping_address = current_user.shipping_address
+      @shipping_address = current_user.shipping_address && current_order.shipping_address
     when :checkout_delivery
       @order = current_order.delivery
     when :checkout_payment
@@ -27,9 +27,9 @@ class CheckoutsController < ApplicationController
   def update
     case step
     when :checkout_address
-      @billing_address = current_user.billing_address
+      @billing_address = current_user.billing_address && current_order.billing_address
       @billing_address.update_attributes(billing_address_params)
-      @shipping_address = current_user.shipping_address
+      @shipping_address = current_user.shipping_address && current_order.shipping_address
       @shipping_address.update_attributes(shipping_address_params)
       redirect_to next_wizard_path({ order: @current_user.order })
     when :checkout_delivery

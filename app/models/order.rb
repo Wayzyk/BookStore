@@ -4,6 +4,12 @@ class Order < ApplicationRecord
   belongs_to :coupon, optional: true
   before_save :update_total
 
+  has_one :billing_address
+  has_one :shipping_address
+
+  accepts_nested_attributes_for :billing_address
+  accepts_nested_attributes_for :shipping_address
+
   def calculate_total
     self.order_items.collect { |item| item.book.price * item.quantity }.sum
   end
