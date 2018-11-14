@@ -1,4 +1,4 @@
-= simple_form_for (@order, @addresses), url: wizard_path, method: :put do |f|
+= simple_form_for ([@order, @addresses]), url: wizard_path, method: :put do |f|
   = render 'checkout_navigation_bar'
   .res-mb-100
     .hidden-xs.hidden-sm
