@@ -20,7 +20,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update
-    @address.update_attributes(address_params)
+    @address.assign_attributes(address_params)
     if @address.save
       redirect_to next_wizard_path
     else
