@@ -1,21 +1,42 @@
 %h1.general-title-margin Checkout
 %ul.steps.list-inline
-  %li.step.active
-    %span.step-number 1
-    %span.step-text.hidden-xs Address
-  %li.step-divider
-  %li.step
-    %span.step-number 2
-    %span.step-text.hidden-xs Delivery
-  %li.step-divider
-  %li.step
-    %span.step-number 3
-    %span.step-text.hidden-xs Payment
-  %li.step-divider
-  %li.step
-    %span.step-number 4
-    %span.step-text.hidden-xs Confirm
-  %li.step-divider
-  %li.step
-    %span.step-number 5
-    %span.step-text.hidden-xs Complete
+  - if step == :checkout_address
+    %li.step.active
+      %span.step-number 1
+      %span.step-text.hidden-xs Address
+  - else
+    %li.step
+      %span.step-number 1
+      %span.step-text.hidden-xs Address
+  - if step == :checkout_delivery
+    %li.step.active
+      %span.step-number 2
+      %span.step-text.hidden-xs Delivery
+  - else
+    %li.step
+      %span.step-number 2
+      %span.step-text.hidden-xs Delivery
+  - if step == :checkout_payment
+    %li.step.active
+      %span.step-number 3
+      %span.step-text.hidden-xs Payment
+  - else
+    %li.step
+      %span.step-number 3
+      %span.step-text.hidden-xs Payment
+  - if step == :checkout_confirm
+    %li.step.active
+      %span.step-number 4
+      %span.step-text.hidden-xs Confirm
+  - else
+    %li.step
+      %span.step-number 4
+      %span.step-text.hidden-xs Confirm
+  - if step == :checkout_complete
+    %li.step.active
+      %span.step-number 5
+      %span.step-text.hidden-xs Complete
+  - else
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs Complete

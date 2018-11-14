@@ -8,6 +8,7 @@ class Address < ApplicationRecord
   validates :address, format: { with: /\A[-A-Za-z\s\d,]{0,49}\z/ }
   validates_length_of :phone, maximum: 15
   validates_length_of :zip, maximum: 10
-  
 
+  accepts_nested_attributes_for :general_user_profile
+  accepts_nested_attributes_for :creator_profile
 end

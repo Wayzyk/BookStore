@@ -6,7 +6,12 @@ class CheckoutsController < ApplicationController
   def show
     case step
     when :checkout_address
-      @address = Address.new
+      Address.first || Address.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
+      @address = Address.first
+      current_user.billing_address || Addres.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
+      @billing_address = current_user.billing_address
+      current_user.shipping_address || Address.new(user_id: current_user.id, type: 'ShippingAddress').save(validate: false)
+      @shipping_address = current_user.shipping_address
     when :checkout_delivery
       @order = current_order.delivery
     when :checkout_payment
@@ -20,20 +25,40 @@ class CheckoutsController < ApplicationController
   end
 
   def update
-    @address.assign_attributes(address_params)
-    if @address.save
-      redirect_to next_wizard_path
+    case step
+    when :checkout_address
+      @billing_address = current_user.billing_address
+      @billing_address.update_attributes(billing_address_params)
+      @shipping_address = current_user.shipping_address
+      @shipping_address.update_attributes(shipping_address_params)
+      redirect_to next_wizard_path({ order: @current_user.order })
+    when :checkout_delivery
+      @order.update_attributes(order_params)
+    when :checkout_payment
+      @credit_card.update_attributes(order_params)
+    when :checkout_confirm
+      @billing_address
+      @shipping_address
+      @order
+      @credit_card
+    when :checkout_complete
+      @billing_address
+      @shipping_address
     else
-      redirect_to wizard_path
+      redirect_to root_path
     end
-    render_wizard @address
   end
 
   private
 
-  def address_params
-    params.require(:address).permit(:type, :first_name, :last_name, :address,
-                                    :city, :zip, :country, :phone)
+  def billing_address_params
+    params.require(:address).permit(billing_address_attributes: [:type, :first_name, :last_name, :address,
+                                    :city, :zip, :country, :phone])
+  end
+
+  def shipping_address_params
+    params.require(:address).permit(shipping_address_attributes: [:type, :first_name, :last_name, :address,
+                                     :city, :zip, :country, :phone])
   end
 
   def redirect_to_finish_wizard
