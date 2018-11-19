@@ -67,8 +67,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
-  gem 'capybara', '~> 3.10', '>= 3.10.1'
-
+  gem "database_cleaner"
 end
 
 group :development do
@@ -87,7 +86,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2', require: false
-  gem 'database_cleaner', '~> 1.5'
+  gem 'capybara', '~> 3.10', '>= 3.10.1'
 end
 
 group :production do
