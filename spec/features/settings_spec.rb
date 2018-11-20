@@ -49,6 +49,11 @@ feature 'User filling addresses', :js => true do
     end
     
     def filling_with(first_name, last_name, address, city, zip, country, phone)
+        visit user_session_path
+        fill_in 'user_email', with: email
+        fill_in 'user_password', with: password
+        click_on 'Sign in'
+        
         visit settings_path
         
         fill_in 'address_first_name', with: :first_name
