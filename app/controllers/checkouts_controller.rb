@@ -5,16 +5,17 @@ class CheckoutsController < ApplicationController
 
   def show
     @user = current_user
+    @order = current_order
     @order_items = current_order.order_items
     case step
     when :checkout_address
-      new_address = Address.new(user_id: current_user.id, type: 'BillingAddress').save(validate: false)
-      current_user.billing_address ||= new_address
-      @billing_address = current_user.billing_address
+      new_address = Address.new(order_id: current_order.id, type: 'BillingAddress').save(validate: false)
+      current_order.billing_address ||= new_address
+      @billing_address = current_order.billing_address
       @billing_address ||= new_address
-      new_address = Address.new(user_id: current_user.id, type: 'ShippingAddress').save(validate: false)
-      current_user.shipping_address ||= new_address
-      @shipping_address = current_user.shipping_address
+      new_address = Address.new(order_id: current_order.id, type: 'ShippingAddress').save(validate: false)
+      current_order.shipping_address ||= new_address
+      @shipping_address = current_order.shipping_address
       shipping_address ||= new_address
     when :checkout_delivery
       @deliveries = Delivery.all
@@ -37,8 +38,8 @@ class CheckoutsController < ApplicationController
   def update
     case step
     when :checkout_address
-      current_user.billing_address.update_attributes(billing_address_params)
-      current_user.shipping_address.update_attributes(shipping_address_params)
+      current_order.billing_address.update_attributes(billing_address_params)
+      current_order.shipping_address.update_attributes(shipping_address_params)
       redirect_to next_wizard_path
     when :checkout_delivery
       current_order.update_attributes(delivery_id: delivery_params[:delivery_id])
