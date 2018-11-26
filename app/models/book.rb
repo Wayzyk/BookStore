@@ -12,7 +12,8 @@ class Book < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :height, :width, :length, numericality: { only_float: true }
   validates :year_of_publish, numericality: {
-                             greater_than_or_equal_to: 1900
+                             greater_than_or_equal_to: 1900,
+                             less_than_or_equal_to: Time.now.year
                            }
    validates :name, uniqueness: true
    validates_length_of :name, maximum: 120
