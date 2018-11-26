@@ -72,12 +72,12 @@ class CheckoutsController < ApplicationController
   end
 
   def billing_address_params
-    params.require(:user).require(:billing_address).permit(:type, :first_name, :last_name, :address,
+    params.require(:order).require(:billing_address).permit(:type, :first_name, :last_name, :address,
                                     :city, :zip, :country, :phone)
   end
 
   def shipping_address_params
-    params.require(:user).require(:shipping_address).permit(:type, :first_name, :last_name, :address,
+    params.require(:order).require(:shipping_address).permit(:type, :first_name, :last_name, :address,
                                      :city, :zip, :country, :phone)
   end
 
