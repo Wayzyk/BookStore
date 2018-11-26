@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
-  belongs_to :user
-  belongs_to :order
+  belongs_to :user, optional: true
+  belongs_to :order, optional: true
 
   validates_presence_of :first_name, :last_name, :address, :city, :zip, :country, :phone
   validates_length_of :first_name, :last_name, :address, :city, :country, maximum: 49
