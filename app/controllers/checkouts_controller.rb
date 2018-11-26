@@ -24,8 +24,8 @@ class CheckoutsController < ApplicationController
       @credit_card = CreditCard.new
     when :checkout_confirm
       return jump_to(previous_step) unless current_order.credit_card_id
-      @billing_address = current_user.billing_address
-      @shipping_address = current_user.shipping_address
+      @billing_address = current_order.billing_address
+      @shipping_address = current_order.shipping_address
       @credit_card = CreditCard.find(current_order.credit_card_id)
     when :checkout_complete
       @billing_address = current_user.billing_address
