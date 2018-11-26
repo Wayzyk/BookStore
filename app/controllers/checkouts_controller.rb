@@ -53,9 +53,6 @@ class CheckoutsController < ApplicationController
       end
     when :checkout_confirm
       flash[:notice] = "Confirm order"
-      @billing_address = current_user.billing_address
-      @shipping_address = current_user.shipping_address
-      @credit_card = CreditCard.find(current_order.credit_card_id)
       redirect_to next_wizard_path
     end
   end
