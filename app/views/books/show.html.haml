@@ -20,23 +20,17 @@
           .col-xs-12.col-md-4
             %p.h1.in-gold-500.mt-10
               = number_to_currency(@book.price, unit: '€')
-          = simple_form_for @order_item do |f|
+          = simple_form_for @order_item, remote: true do |f|
             = f.hidden_field :book_id, value: @book.id
             .col-xs-5.col-md-3
               .input-group.general-position
                 %a.input-link{href: "#"}
                   %i.fa.fa-minus.line-height-40
-                = f.text_field :quantity, class: 'form-control quantity-input'
+                = f.text_field :quantity, value: 1, class: 'form-control quantity-input', min: 1
                 %a.input-link{href: "#"}
                   %i.fa.fa-plus.line-height-40
             .col-xs-7.col-md-5
               = f.submit "Add to Cart", class: 'btn btn-default pull-right general-position'
-          -# .col-xs-5.col-md-3
-          -#   .input-group.general-position
-          -#     = simple_form_for @order_item do |f|
-          -#       = f.hidden_field :book_id, value: @book.id
-          -#       = f.number_field :quantity, class: 'form-control quantity-input'
-          -#       = f.submit "Add to Cart", class: "col-xs-7 col-md-5 btn btn-default pull-right general-position"
       .general-info-wrap.divider-lg
         %p
           = t('book.show.description')
