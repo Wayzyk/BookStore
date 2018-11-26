@@ -38,7 +38,7 @@
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
-      = "#{@credit_card.credit_card_number.slice(0..4)} **** **** #{@credit_card.credit_card_number.slice(12..16)}"
+      = "#{@credit_card.credit_card_number.slice(0..3)} **** **** #{@credit_card.credit_card_number.slice(12..16)}"
       = link_to '/checkouts/checkout_payment' do
         %span.general-edit edit
       %br
