@@ -3,6 +3,7 @@ class OrderItemsController < ApplicationController
     @order = current_order
     @item = @order.order_items.build(items_params)
     @order.save!
+    flash[:success] = 'Book add to your order.'
     session[:order_id] = @order.id
   end
 
