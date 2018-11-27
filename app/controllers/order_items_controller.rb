@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
   def create
     @order = current_order
     @item = @order.order_items.find_or_initialize_by(book_id: items_params[:book_id])
-    @order.save unless @order.persisted?
+    @order.save!
     session[:order_id] = @order.id if update_quantity.save
   end
   

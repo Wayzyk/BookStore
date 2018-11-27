@@ -3,8 +3,8 @@
     %p.font-16
       = t('cart.bottom.sub_total')
   %td
-    %p.font-16
-      = number_to_currency(current_order.subtotal, unit: '€')
+    %p.font-16 
+      = number_to_currency(current_order.subtotal)
 %tr
   %td
     %p.font-16
