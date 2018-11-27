@@ -1,9 +1,8 @@
 class OrderItemsController < ApplicationController
   def create
-    @order = current_order
-    @item = @order.order_items.find_or_initialize_by(book_id: items_params[:book_id])
-    @order.save!
-    session[:order_id] = @order.id if update_quantity.save
+    @item = current_order.order_items.find_or_initialize_by(book_id: items_params[:book_id])
+    current_order.save!
+    session[:order_id] = current_order.id if update_quantity.save
   end
   
   def update 
@@ -12,8 +11,7 @@ class OrderItemsController < ApplicationController
   end 
 
   def destroy
-    @order = current_order
-    @item = @order.order_items.find(params[:id])
+    @item = current_order.order_items.find(params[:id])
     @item.destroy
     @order.save
     redirect_to cart_path
