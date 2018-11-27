@@ -9,10 +9,12 @@ class CheckoutsController < ApplicationController
     @order_items = current_order.order_items
     case step
     when :checkout_address
-      new_address = Address.new(order_id: current_order.id, type: 'BillingAddress')
+      new_address = Address.new(order_id: current_order.id, type: 'BillingAddress').save(validate: false)
+      current_order.billing_address ||= new_address
       @billing_address = current_order.billing_address
       @billing_address ||= new_address
-      new_address = Address.new(order_id: current_order.id, type: 'ShippingAddress')
+      new_address = Address.new(order_id: current_order.id, type: 'ShippingAddress').save(validate: false)
+      current_order.shipping_address ||= new_address
       @shipping_address = current_order.shipping_address
       shipping_address ||= new_address
     when :checkout_delivery
