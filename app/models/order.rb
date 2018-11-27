@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   belongs_to :delivery, optional: true
   belongs_to :coupon, optional: true
   before_save :update_total
