@@ -13,6 +13,7 @@ class AddressesController < ApplicationController
     @address.assign_attributes(address_params)
     if @address.save
       redirect_to settings_path
+      # comment
     else
       render 'new'
     end
